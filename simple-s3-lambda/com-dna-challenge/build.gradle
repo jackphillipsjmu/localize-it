@@ -1,0 +1,79 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+}
+
+group 'com.dna.challenge'
+version '0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+//    compile group: 'cloud.localstack', name: 'localstack-utils', version: '0.1.19'
+
+    // AWS S3
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.548'
+
+    // AWS Lambda
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-events', version: '2.2.6'
+
+    // AWS Java Core
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version: '1.1.0'
+
+    // CSV Processing using Jackson
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.6.7'
+
+    // Spark Dependencies
+//    compile group: 'org.apache.spark', name: 'spark-core_2.12', version: '2.4.3'
+//    compile group: 'org.apache.spark', name: 'spark-sql_2.12', version: '2.4.3'
+
+    // Elasticsearch REST Client
+//    compile("org.elasticsearch.client:elasticsearch-rest-high-level-client:7.0.1")
+
+    // Hadoop AWS
+//    compile group: 'org.apache.hadoop', name: 'hadoop-aws', version: '3.2.0'
+
+    // Hadoop Common
+//    compile('org.apache.hadoop:hadoop-common:3.2.0')
+
+    // Hadoop HDFS
+//    compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: '3.2.0'
+
+    // JUnit Testing
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+}
+
+configurations {
+    all {
+        resolutionStrategy {
+            // Must force Jackson Version due to conflicts with Hadoop Common/Spark Library
+            force 'com.fasterxml.jackson.core:jackson-core:2.6.7', 'com.fasterxml.jackson.core:jackson-databind:2.6.7'
+        }
+    }
+}
+
+compileKotlin { kotlinOptions.jvmTarget = "1.8" }
+compileTestKotlin { kotlinOptions.jvmTarget = "1.8" }
+
+sourceSets {
+    main.java.srcDirs += 'src/main/java'
+    test.java.srcDirs += 'src/test/java'
+
+    main.java.srcDirs += 'src/main/kotlin/'
+    test.java.srcDirs += 'src/test/kotlin/'
+}
+
+jar {
+    zip64 true
+
+    manifest {
+        attributes "Main-Class": ""
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
