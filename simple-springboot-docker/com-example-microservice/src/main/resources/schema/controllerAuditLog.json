@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Controller Audit Log Entity",
+  "type": "object",
+  "entity": true,
+  "table": {"tableName": "audit_controller"},
+  "properties": {
+    "id": {
+      "description": "ID for the specified Log Object",
+      "required": true,
+      "javaType": "java.lang.Long",
+      "column": "aud_id",
+      "isIdColumn": true,
+      "generatedValue": {
+        "strategy": "IDENTITY"
+      }
+    },
+    "requestMapping": {
+      "column": "request_mapping",
+      "description": "Controller Request Mapping, i.e. GET, POST, etc.",
+      "type": "string"
+    },
+    "uri": {
+      "column": "uri",
+      "description": "URI Endpoint",
+      "type": "string"
+    },
+    "inboundAddress": {
+      "column": "inbound_addr",
+      "description": "Address of Inbound Host/IP",
+      "type": "string"
+    },
+    "responseStatus": {
+      "column": "resp_status",
+      "description": "JSON Request HTTP Headers",
+      "type": "integer"
+    },
+    "requestBody": {
+      "column": "req_body",
+      "description": "JSON Request Body",
+      "type": "string"
+    },
+    "responseBody": {
+      "column": "resp_body",
+      "description": "JSON Response Body",
+      "type": "string"
+    }
+  }
+}

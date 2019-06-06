@@ -1,0 +1,7 @@
+version: '3'
+services:
+  microservice:
+    container_name: simple_springboot_docker
+    build: .
+    ports:
+      - "8089:8089"
