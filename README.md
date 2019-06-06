@@ -12,10 +12,10 @@ This service is intended to display an end-to-end solution for processing Weathe
 Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
 
 ### S3 Lambda ([simple-s3-lambda](simple-s3-lambda))
-Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. The functions code will transform the data as follows:
+Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. This is similar to the [D&A Serverless Lambda Challenge](https://techchallenge.captechlab.com/data-engineering/Serverless.Assignment-1.Lambda-Introduction)
 
-### Spark
-**Coming Soon!** Code is written just need to package it nicely :)
+### Spark _(Coming Soon!)_
+Code is written just need to package it nicely :)
 
 ### Future Examples to Implement
 - **Sonar**: Performs static code analysis to ensure code quality.
