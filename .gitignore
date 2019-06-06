@@ -8,6 +8,9 @@ simple-jenkins/resources/docker/jenkins_data/**
 simple-jenkins/resources/docker/home/**
 simple-jenkins/resources/tmp/**
 simple-s3-lambda/resources/tmp/**
+simple-s3-lambda/com-dna-challenge/build/**
+simple-s3-lambda/com-dna-challenge/.idea/**
+simple-s3-lambda/com-dna-challenge/.gradle/**
 simple-springboot-docker/resources/tmp/**
 weather-alerts/resources/tmp/**
 weather-alerts/com-alert-lambda/build/**
