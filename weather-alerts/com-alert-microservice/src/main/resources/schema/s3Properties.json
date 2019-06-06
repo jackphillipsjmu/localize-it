@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "description": "AWS S3 Properties used object to hold S3 related information for source/sink processing.",
+  "type": "object",
+  "properties": {
+    "url": {
+      "description": "URL for the AWS S3 instance",
+      "type": "string"
+    },
+    "region": {
+      "description": "AWS Region information, ex. us-east-1",
+      "type": "string"
+    },
+    "sourceBucket": {
+      "description": "Name of the AWS S3 Source Bucket to use",
+      "type": "string"
+    },
+    "sinkBucket": {
+      "description": "Name of the AWS S3 Sink Bucket to use",
+      "type": "string"
+    },
+    "pathStyleAccessEnabled": {
+      "description": "Boolean that dictates if Path Style Access is Enabled",
+      "type": "boolean"
+    },
+    "chunkedEncodingDisabled": {
+      "description": "Boolean that dictates if Chunk Encoding is disabled",
+      "type": "boolean"
+    }
+  }
+}

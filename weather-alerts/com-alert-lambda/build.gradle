@@ -1,0 +1,58 @@
+buildscript {
+    // Serves as a global variable
+    ext.kotlin_version = '1.3.21'
+
+    // Defines where we get our dependencies
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        // Retrieves the Kotlin gradle plugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+group 'com.alert.lambda'
+version '0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Kotlin JDK
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    // AWS S3
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.548'
+    // AWS Lambda
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-events', version: '2.2.6'
+    // AWS Java Core
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version: '1.1.0'
+    // JUnit Testing
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin { kotlinOptions.jvmTarget = "1.8" }
+compileTestKotlin { kotlinOptions.jvmTarget = "1.8" }
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin/'
+    test.java.srcDirs += 'src/test/kotlin/'
+}
+
+jar {
+    zip64 true
+
+    manifest {
+        attributes "Main-Class": ""
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

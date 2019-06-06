@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "description": "Weather Alert Process Result",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "ID for the Alert Processing Result for Traceability",
+      "type": "string"
+    },
+    "alertsProcessed": {
+      "description": "Number of Alerts that were Processed",
+      "type": "integer"
+    },
+    "status": {
+      "description": "Status of the Processor Result",
+      "javaType": "com.alert.microservice.api.Status"
+    },
+    "timestamp": {
+      "description": "Timestamp to track when the Alerts were Processed",
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

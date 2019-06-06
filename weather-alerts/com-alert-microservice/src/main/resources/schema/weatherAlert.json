@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "description": "Weather Alert Extracted from the weather.gov Atom Feed",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Identifier for the Weather Alert",
+      "type": "string"
+    },
+    "title": {
+      "description": "Title for the Weather Alert",
+      "type": "string"
+    },
+    "summary": {
+      "description": "Summary for the Weather Alert",
+      "type": "string"
+    },
+    "category": {
+      "description": "Category of the Weather Alert",
+      "type": "string"
+    },
+    "urgency": {
+      "description": "Urgency of the Weather Alert",
+      "type": "string"
+    },
+    "areaDesc": {
+      "description": "Description of the Weather Alert",
+      "type": "string"
+    },
+    "updatedDate": {
+      "description": "Updated Date of the Weather Alert",
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective": {
+      "description": "Effective Date of the Weather Alert",
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires": {
+      "description": "Expiration Date of the Weather Alert",
+      "type": "string",
+      "format": "date-time"
+    },
+    "severity": {
+      "description": "Severity of the Weather Alert",
+      "type": "string"
+    },
+    "active": {
+      "description": "Boolean to dictate whether this Weather Alert is active or not",
+      "type": "boolean"
+    },
+    "certainty": {
+      "description": "Certainty of the Weather Alert",
+      "type": "string"
+    }
+  }
+}

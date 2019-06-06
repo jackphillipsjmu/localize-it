@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "description": "AWS Lambda Properties used to hold AWS Lambda related information.",
+  "type": "object",
+  "properties": {
+    "url": {
+      "description": "URL for the AWS Lambda endpoint",
+      "type": "string"
+    },
+    "region": {
+      "description": "AWS Region information, ex. us-east-1",
+      "type": "string"
+    },
+    "functionName": {
+      "description": "Name of the AWS Lambda Function",
+      "type": "string"
+    },
+    "jarPath": {
+      "description": "Path to JAR file to push to AWS Lambda",
+      "type": "string"
+    },
+    "handler": {
+      "description": "Handler for Lambda Function",
+      "type": "string"
+    },
+    "role": {
+      "description": "ARN Related to the Lambda Function",
+      "type": "string"
+    },
+    "timeout": {
+      "description": "Timeout for Lambda Function",
+      "type": "integer"
+    }
+  }
+}
