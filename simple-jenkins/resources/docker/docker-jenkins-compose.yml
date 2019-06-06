@@ -1,0 +1,15 @@
+version: "2"
+services:
+  jenkins:
+    container_name: simple_jenkins
+    image: jenkinsci/blueocean
+    user: root
+    ports:
+      - "8082:8080"
+      - "8443:8443"
+      - "50002:50000"
+      - "8085:8085"
+    volumes:
+      - ./jenkins_data:/var/jenkins_home
+      - ./home:/home
+      - /var/run/docker.sock:/var/run/docker.sock

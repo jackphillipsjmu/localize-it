@@ -1,0 +1,60 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Builds Gradle Microservice from GitHub Repository</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.jira.JiraProjectProperty plugin="jira@3.0.7"/>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.4">
+      <projectUrl>https://github.com/jackphillipsjmu/com-example-microservice.git/</projectUrl>
+      <displayName></displayName>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.10.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/jackphillipsjmu/com-example-microservice.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+echo &quot;= INFO: Enabling Gradle Execution =&quot;
+chmod +x gradlew 
+
+echo &quot;= INFO: Exporting Server Port =&quot;
+export SERVER_PORT=8085
+
+LOG_DIR=./logs
+
+echo &quot;= INFO: Creating Log Directory =&quot;
+mkdir $LOG_DIR
+
+echo &quot;= INFO: Building Gradle Project =&quot;
+./gradlew clean build
+
+echo &quot;= INFO: Running Gradle Project =&quot;
+./gradlew bootRun
+
+echo &quot;= INFO: Done =&quot;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
