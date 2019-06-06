@@ -1,0 +1,12 @@
+.DS_STORE
+**/.DS_Store
+.idea/**
+.gradle/**
+out/**
+build/**
+simple-jenkins/resources/docker/jenkins_data/**
+simple-jenkins/resources/docker/home/**
+simple-jenkins/resources/tmp/**
+simple-s3-lambda/resources/tmp/**
+simple-springboot-docker/resources/tmp/**
+weather-alerts/resources/tmp/**
