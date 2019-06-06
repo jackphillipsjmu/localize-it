@@ -10,3 +10,9 @@ simple-jenkins/resources/tmp/**
 simple-s3-lambda/resources/tmp/**
 simple-springboot-docker/resources/tmp/**
 weather-alerts/resources/tmp/**
+weather-alerts/com-alert-lambda/build/**
+weather-alerts/com-alert-lambda/.idea/**
+weather-alerts/com-alert-lambda/.gradle/**
+weather-alerts/com-alert-microservice/build/**
+weather-alerts/com-alert-microservice/.idea/**
+weather-alerts/com-alert-microservice/.gradle/**
