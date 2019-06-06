@@ -1,4 +1,4 @@
-#simple-jenkins
+# simple-jenkins
 Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
 
 - **Current Execution Flow**
