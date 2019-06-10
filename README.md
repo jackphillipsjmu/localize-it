@@ -14,26 +14,32 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | Spring Boot   | Makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". |
 | Docker        | Container platform to securely build, share and run any application, anywhere. |
 | Gradle        | Build automation system that is the "next iteration" of Maven |
+| React         | Popular JavaScript library for building user interfaces |
 
 | **Language** | **Description** |
-|:---------:|-----------------| 
+|:---------:|-----------------|
 | Kotlin    | The default Android programming language built on the JVM. Kotlin solves a bunch of issues seen in Java providing a enjoyable functional programming experience that is completely backwards compatible with Java. If you're from a Python/R/Scala background you'll feel right at home. |
-| Java      | You know Java, in this repository we currently use Java `1.8`. |
-| Bash      | Unix shell and command language primarily used for setting up things in each project. |
-| Groovy    | JVM based language primarily used in Gradle to build projects (Kotlin is quickly gaining traction over Groovy so hop on the Kotlin train!). |
-| Python    | Interpreted, high-level, general-purpose programming language. Currently used primarily in conjunction with LocalStack's Local AWS CLI.  |
+| Java       | You know Java, in this repository we currently use Java `1.8`. |
+| JavaScript | Used primarily for Node/Web related functionality. |
+| Bash       | Unix shell and command language primarily used for setting up things in each project. |
+| Groovy     | JVM based language primarily used in Gradle to build projects (Kotlin is quickly gaining traction over Groovy so hop on the Kotlin train!). |
+| Python     | Interpreted, high-level, general-purpose programming language. Currently used primarily in conjunction with LocalStack's Local AWS CLI.  |
 
 ## Examples Demonstrated in this Repository
+
+### Jenkins React Web-Application ([jenkins-doom-react](jenkins-doom-react))
+Builds a Jenkins instance that has the ability to pull in a local [React](https://reactjs.org/) GitHub project, build and run it using Blue Ocean's Jenkins Docker image. For fun, the React application utilizes [DOSBox](https://www.dosbox.com/) to let you play Doom in your browser!
+
+### Jenkins Spring Boot ([simple-jenkins](simple-jenkins))
+Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
+
+_**NOTE**: This currently only creates a Jenkins "master" instance without any "slave" nodes. If you choose to run the microservice job it will run on the master node. This is definitely not best practice but does provide examples on how a job can be pushed to Jenkins and ran using the Jenkins CLI. Future iterations will expand upon this to provide a full fledged Jenkins environment._
+
 ### Spring Boot Microservice Docker Deploy ([simple-springboot-docker](simple-springboot-docker))
 Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory audit logging (H2) of REST endpoints.
 
 ### Weather Alert Service ([weather-alerts](weather-alerts))
 Intended to display an end-to-end solution for processing Weather Alert data using a local testing environment that includes a multitude of cloud components while showing other useful examples interacting with different APIs, SDKs and frameworks.
-
-### Jenkins ([simple-jenkins](simple-jenkins))
-Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
-
-_**NOTE**: This currently only creates a Jenkins "master" instance without any "slave" nodes. If you choose to run the microservice job it will run on the master node. This is definitely not best practice but does provide examples on how a job can be pushed to Jenkins and ran using the Jenkins CLI. Future iterations will expand upon this to provide a full fledged Jenkins environment._
 
 ### S3 Lambda ([simple-s3-lambda](simple-s3-lambda))
 Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. This is similar to the [D&A Serverless Lambda Challenge](https://techchallenge.captechlab.com/data-engineering/Serverless.Assignment-1.Lambda-Introduction).
@@ -48,9 +54,9 @@ Code is written just need to package it nicely :)
 * [ ] **API Gateway**: Both AWS ([AWS API Gateway](https://aws.amazon.com/api-gateway/)) and Netflix ([Zuul](https://github.com/Netflix/zuul), [Eureka](https://github.com/Netflix/eureka)) flavors.
 * [ ] **Jenkins Instances with Master/Slave Communication**: To supply a full fledged local Jenkins environment.
 * [ ] **Kubernetes**: Open-source system for automating deployment, scaling, and management of containerized applications.
-* [ ] **Web UI/Visualizations**: Local React, Vue, Angular, whatever new JavaScript framework is out there to show different ways of interacting with backend services and visualizing data. Libraries such as D3js, Echarts and Google Charts will most likely be explored to hopefully ensure your clients tech stack lines up.
-* [ ] **Databases**: PostgreSQL, MySQL and other NoSQL databases. 
-* [ ] **All the things!**: This should be a living repository and updated to help others with their own local development. 
+* [ ] **Web UI/Visualizations**: Libraries such as D3js, Echarts and Google Charts will most likely be explored.
+* [ ] **Databases**: PostgreSQL, MySQL and other NoSQL databases.
+* [ ] **All the things!**: This should be a living repository and updated to help others with their own local development.
 
 ## Installing Necessary Dependencies
 _Dependencies can also be installed through other mechanisms but we primarily use `brew` in this repository, just go with what's easiest for you! If you do not have Homebrew on your machine try executing the following command to install it `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` or differ to the installation script explained under "Option 2 Install Dependencies Using Script"_
