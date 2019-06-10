@@ -33,6 +33,8 @@ Builds a Jenkins instance that has the ability to pull in a local [React](https:
 ### Jenkins Spring Boot ([simple-jenkins](simple-jenkins))
 Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
 
+_**NOTE**: This currently only creates a Jenkins "master" instance without any "slave" nodes. If you choose to run the microservice job it will run on the master node. This is definitely not best practice but does provide examples on how a job can be pushed to Jenkins and ran using the Jenkins CLI. Future iterations will expand upon this to provide a full fledged Jenkins environment._
+
 ### Spring Boot Microservice Docker Deploy ([simple-springboot-docker](simple-springboot-docker))
 Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory audit logging (H2) of REST endpoints.
 
