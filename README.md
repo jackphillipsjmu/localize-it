@@ -15,6 +15,7 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | Docker        | Container platform to securely build, share and run any application, anywhere. |
 | Gradle        | Build automation system that is the "next iteration" of Maven |
 | React         | Popular JavaScript library for building user interfaces |
+| PostgreSQL    | Relational Database |
 
 | **Language** | **Description** |
 |:---------:|-----------------|
@@ -44,6 +45,9 @@ Intended to display an end-to-end solution for processing Weather Alert data usi
 ### S3 Lambda ([simple-s3-lambda](simple-s3-lambda))
 Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. This is similar to the [D&A Serverless Lambda Challenge](https://techchallenge.captechlab.com/data-engineering/Serverless.Assignment-1.Lambda-Introduction).
 
+### PostgreSQL ([postgres](postgres))
+Creates a Docker container that contains a PostgreSQL instance which is populated with an example database, table and table data.
+
 ### Spark _(Coming Soon!)_
 Code is written just need to package it nicely :)
 
@@ -55,7 +59,7 @@ Code is written just need to package it nicely :)
 * [ ] **Jenkins Instances with Master/Slave Communication**: To supply a full fledged local Jenkins environment.
 * [ ] **Kubernetes**: Open-source system for automating deployment, scaling, and management of containerized applications.
 * [ ] **Web UI/Visualizations**: Libraries such as D3js, Echarts and Google Charts will most likely be explored.
-* [ ] **Databases**: PostgreSQL, MySQL and other NoSQL databases.
+* [ ] **Databases**: RDBMS and other NoSQL databases.
 * [ ] **All the things!**: This should be a living repository and updated to help others with their own local development.
 
 ## Installing Necessary Dependencies
