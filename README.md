@@ -59,7 +59,7 @@ Code is written just need to package it nicely :)
 * [ ] **Jenkins Instances with Master/Slave Communication**: To supply a full fledged local Jenkins environment.
 * [ ] **Kubernetes**: Open-source system for automating deployment, scaling, and management of containerized applications.
 * [ ] **Web UI/Visualizations**: Libraries such as D3js, Echarts and Google Charts will most likely be explored.
-* [ ] **Databases**: PostgreSQL, MySQL and other NoSQL databases.
+* [ ] **Databases**: RDBMS and other NoSQL databases.
 * [ ] **All the things!**: This should be a living repository and updated to help others with their own local development.
 
 ## Installing Necessary Dependencies
