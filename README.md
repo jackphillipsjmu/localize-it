@@ -30,7 +30,6 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 ### Jenkins React Web-Application ([jenkins-doom-react](jenkins-doom-react))
 Builds a Jenkins instance that has the ability to pull in a local [React](https://reactjs.org/) GitHub project, build and run it using Blue Ocean's Jenkins Docker image. For fun, the React application utilizes [DOSBox](https://www.dosbox.com/) to let you play Doom in your browser!
 
-
 ### Jenkins Spring Boot ([simple-jenkins](simple-jenkins))
 Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
 
@@ -39,11 +38,6 @@ Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory
 
 ### Weather Alert Service ([weather-alerts](weather-alerts))
 Intended to display an end-to-end solution for processing Weather Alert data using a local testing environment that includes a multitude of cloud components while showing other useful examples interacting with different APIs, SDKs and frameworks.
-
-### Jenkins ([simple-jenkins](simple-jenkins))
-Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
-
-_**NOTE**: This currently only creates a Jenkins "master" instance without any "slave" nodes. If you choose to run the microservice job it will run on the master node. This is definitely not best practice but does provide examples on how a job can be pushed to Jenkins and ran using the Jenkins CLI. Future iterations will expand upon this to provide a full fledged Jenkins environment._
 
 ### S3 Lambda ([simple-s3-lambda](simple-s3-lambda))
 Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. This is similar to the [D&A Serverless Lambda Challenge](https://techchallenge.captechlab.com/data-engineering/Serverless.Assignment-1.Lambda-Introduction).
