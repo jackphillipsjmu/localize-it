@@ -7,9 +7,6 @@ build/**
 simple-jenkins/resources/docker/jenkins_data/**
 simple-jenkins/resources/docker/home/**
 simple-jenkins/resources/tmp/**
-jenkins-doom-react/resources/docker/jenkins_data/**
-jenkins-doom-react/resources/docker/home/**
-jenkins-doom-react/resources/tmp/**
 simple-s3-lambda/resources/tmp/**
 simple-s3-lambda/com-dna-challenge/build/**
 simple-s3-lambda/com-dna-challenge/.idea/**
