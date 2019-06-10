@@ -2,14 +2,18 @@
 Repository intended to show how to setup and perform local development for both simple and complex software solutions. This helps reduce costs running things within an external environment while attempting to mitigate the classic _"works on my machine"_ paradigm. This repository will be updated to include more functionality in the future but of coarse feel free to add new additions and feature requests!
 
 ## Examples Demonstrated in this Repository
+
+### Jenkins React Web-Application [jenkins-doom-react](jenkins-doom-react)
+Builds a Jenkins instance that has the ability to pull in a local [React](https://reactjs.org/) GitHub project, build and run it using Blue Ocean's Jenkins Docker image. For fun, the React application utilizes [DOSBox](https://www.dosbox.com/) to let you play [Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game) in your browser!
+
+### Jenkins Spring Boot ([simple-jenkins](simple-jenkins))
+Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
+
 ### Spring Boot Microservice Docker Deploy ([simple-springboot-docker](simple-springboot-docker))
 Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory audit logging of REST endpoints.
 
 ### Weather Alert Service ([weather-alerts](weather-alerts))
 This service is intended to display an end-to-end solution for processing Weather Alert data using a local testing environment that includes a multitude of cloud components while showing other useful examples interacting with different APIs, SDKs and frameworks.
-
-### Jenkins ([simple-jenkins](simple-jenkins))
-Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
 
 ### S3 Lambda ([simple-s3-lambda](simple-s3-lambda))
 Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. This is similar to the [D&A Serverless Lambda Challenge](https://techchallenge.captechlab.com/data-engineering/Serverless.Assignment-1.Lambda-Introduction)
