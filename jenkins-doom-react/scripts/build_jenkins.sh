@@ -13,7 +13,6 @@ JENKINS_UI_PORT=8082
 LOCAL_JENKINS_HOME=../resources/docker/home
 LOCAL_JENKINS_DATA=../resources/docker/jenkins_data
 LOCAL_SECRET_PATH=$LOCAL_JENKINS_DATA/secrets/initialAdminPassword
-
 JENKINS_CLI_JAR=$LOCAL_JENKINS_DATA/war/WEB-INF/jenkins-cli.jar
 ALIVE_MICROSERVICE_JOB_PATH=../resources/jobs/gradle_local_keep_alive.xml
 REACT_JOB_PATH=../resources/jobs/doom_react_app.xml
@@ -22,8 +21,9 @@ WEB_APP_URL=http://localhost:3000
 WEB_APP=../resources/web/simple-node-js-react-npm-app
 JENKINS_APP=$LOCAL_JENKINS_HOME/simple-node-js-react-npm-app
 
+WEB_APP_WORKSPACE=$LOCAL_JENKINS_DATA/workspace/doom-react
 
-
+# Check operating system to ensure we can execute certain functions
 function isOperatingSystemSupported {
   echo "= INFO: Checking Operating System ="
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -73,6 +73,7 @@ function waitForDockerToRun {
   fi
 }
 
+# Starts docker in background, currently is only supported for MacOS.
 function startDocker {
   if ! dockerRunning; then
     echo "= INFO: Starting Docker ="
@@ -82,6 +83,8 @@ function startDocker {
   fi
 }
 
+# Restarts Dcoker if necessary, if docker is NOT running it will attempt to
+# start it for you. Currently, this function is only supported for MacOS.
 function restartDocker {
   if dockerRunning; then
     osascript -e 'quit app "Docker"'
@@ -94,8 +97,8 @@ function restartDocker {
 
 # Checks the provided String to see if it is empty or not
 #
-# param1=value to check for emptiness
-# return=true if empty, false otherwise
+# param1 = value to check for emptiness
+# return = true if empty, false otherwise
 function isEmpty {
   if [ -z "$1" ]; then
       return
@@ -106,8 +109,8 @@ function isEmpty {
 
 # Checks to see if a Docker container exists with the specified name
 #
-# param1=name of Docker container to check existance of
-# return=true if container exists, false otherwise
+# param 1 = name of Docker container to check existance of
+# return = true if container exists, false otherwise
 function containerExists {
   # Grab first argument and check if the container exists
   if ! isEmpty "$(docker container ls -q -a -f name=$1)"; then
@@ -133,29 +136,9 @@ function processRunningOnPort {
 function runDocker {
   local dockerFile=$1
   echo "= INFO: Running Docker Compose on file $dockerFile ="
-  echo "= INFO: Logs for this Docker container can be found in the $LOG_DIR directory ="
   LOG_FILE_PATH="$LOG_DIR/jenkins_`date +%s`.log"
-  docker-compose -f $dockerFile up --force-recreate --build > "$LOG_FILE_PATH" 2>&1 &
-}
-
-# Shows how to execute a command in a Docker container
-function executeCommandInContainer {
-  local containerName=$1
-  local command=$2
-  echo "= INFO: Executing Command $command on Docker Container $containerName"
-  docker exec -it $containerName $command
-}
-
-# Shows how to open a bash shell in docker container
-function openBashContainerTerminal {
-  local containerName=$1
-  echo "= INFO: Opening Bash Shell for container $containerName"
-  # Check if the container exists and then run operation
-  if containerExists $containerName; then
-    docker exec -it $containerName /bin/bash
-  else
-    echo "= ERROR: Cannot open shell container $containerName does not exist! ="
-  fi
+  echo "= INFO: Logs for this Docker container can be found at $LOG_FILE_PATH ="
+  docker-compose -f $dockerFile up --force-recreate --build >"$LOG_FILE_PATH" 2>&1 &
 }
 
 # Calls the underlying docker command to retrieve the admin password that is
@@ -177,7 +160,7 @@ function printInitialJenkinsPassword {
 
 # Function that will force remove the specified Docker container if it exists
 #
-# param1=Docker container name to destroy
+# param 1 = Docker container name to destroy
 function destroyDockerContainer {
   # Grab first argument
   local containerName=$1
@@ -193,7 +176,7 @@ function destroyDockerContainer {
 # Function that will stop the specified Docker container if it exists and
 # is currently running
 #
-# param1=Docker container name to stop
+# param 1 = Docker container name to stop
 function stopDockerContainer {
   # Grab first argument
   local containerName=$1
@@ -211,19 +194,12 @@ function stopDockerContainer {
 }
 
 # Removes the provided directory if it exists
+#
+# param1 = Directory to remove
 function removeDirectory {
   local dirToRemove=$1
   echo "= INFO: Removing $dirToRemove ="
   if [ -d "$dirToRemove" ]; then rm -Rf $dirToRemove; fi
-}
-
-function fileContainsString {
-  if grep -q "$1" "$2";
-  then
-    return
-  else
-    false
-  fi
 }
 
 # Build Jenkins Docker container and retrieve credential information
@@ -241,19 +217,22 @@ function buildJenkins {
   while ! $jenkinsUp; do
     # Iterate counter by one
     counter=$((counter+1))
+
     # Check if mount issues are present in log file and attempt to recover
     if grep -q "device or resource busy" "$LOG_FILE_PATH"; then
-      echo "= ERROR: Mounting issues found! Attempting to recover. ="
-
+      echo "= ERROR: Mounting issues found! Attempting to recover (Attempt #$counter) ="
+      # Try to resolve 3 times then exit script
+      if [ "$counter" -ge "3" ]; then
+        echo "= ERROR: Cannot resolve mounting issues! Exiting script. ="
+        exit 1
+      fi
+      # Destroy everything that we can concerning the Jenkins data/containers
+      # and attempt to restart services
       removeDirectory $LOCAL_JENKINS_DATA
       removeDirectory $LOCAL_JENKINS_HOME
-
-      # if [ -d "$LOCAL_JENKINS_DATA" ]; then rm -Rf $LOCAL_JENKINS_DATA; fi
-      # if [ -d "$LOCAL_JENKINS_HOME" ]; then rm -Rf $LOCAL_JENKINS_HOME; fi
-
       destroyDockerContainer $JENKINS_CONTAINER_NAME
-      # restartDocker
-      # waitForDockerToRun
+      restartDocker
+      waitForDockerToRun
       runDocker $JENKINS_DOCKER_FILE
     fi
     # Check if log file contains the proper output to say that Jenkins is
@@ -269,18 +248,6 @@ function buildJenkins {
 
   # Print password to console
   printInitialJenkinsPassword $JENKINS_CONTAINER_NAME
-}
-
-# Destroy all resources for a fresh deployment of a Jenkins instance
-function cleanJenkinsAndBuild {
-  echo "= INFO: Cleaning Jenkins (NOTE: it take several minutes to retrieve initial Jenkins Admin Password) ="
-  # Destroy Jenkins Container
-  destroyDockerContainer $JENKINS_CONTAINER_NAME
-  # Remove old directories for fresh run
-  removeDirectory $LOCAL_JENKINS_HOME
-  removeDirectory $LOCAL_JENKINS_DATA
-  # Build Jenkins using Docker
-  buildJenkins
 }
 
 # Creates a Jenkins user
@@ -359,29 +326,32 @@ function urlIsUp {
 
 # Main function to build/run/clean Jenkins related operations
 function executeJenkins {
+  # Check if the web-app is already up
+  if urlIsUp $WEB_APP_URL; then
+    echo "= ERROR: Web-App at $WEB_APP_URL appears to be running! Please terminate this and re-run the script. ="
+    exit 1
+  fi
   # Run Docker if it is not running already
   waitForDockerToRun
   # Create Log directory if it does NOT exist
   mkdir -p $LOG_DIR
-  # Prompt user to see if they would like to completely wipe out the Jenkins
-  # Docker image/container for a fresh rebuild
-  echo -n "= INPUT: Would you like to Clean and Build Jenkins (y/n)? = "
-  read cleanBuildAnswer
-  if [ "$cleanBuildAnswer" != "${cleanBuildAnswer#[Yy]}" ] ;then
-    cleanJenkinsAndBuild
-  else
-    buildJenkins
-  fi
+  # Build Jenkins image
+  buildJenkins
 
-  # Wait for web app to be running to notify user via the terminal so they
-  # do not need to check the Jenkins job
-  while ! urlIsUp $WEB_APP_URL; do
-    echo "= INFO: Waiting for $WEB_APP_URL to be up ="
-    sleep 10
-  done
+  echo "= INFO: Creating Jenkins Job for React Web-App ="
+  createAndRunJenkinsJob
 }
 
 # Call functions to get local Dockerized Jenkins up and running
 # then create and run the React web-app job
 executeJenkins
-createAndRunJenkinsJob
+
+# Wait for web app to be running to notify user via the terminal so they
+# do not need to check the Jenkins job
+while ! urlIsUp $WEB_APP_URL; do
+  echo "= INFO: Waiting for $WEB_APP_URL to be up ="
+  sleep 20
+done
+
+# Let them know we're good to go 
+echo "= INFO: React Web-App is up at $http://localhost:3000 ="
