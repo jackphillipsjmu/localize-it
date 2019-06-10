@@ -16,7 +16,7 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | Gradle        | Build automation system that is the "next iteration" of Maven |
 
 | **Language** | **Description** |
-|:---------:|-----------------| 
+|:---------:|-----------------|
 | Kotlin    | The default Android programming language built on the JVM. Kotlin solves a bunch of issues seen in Java providing a enjoyable functional programming experience that is completely backwards compatible with Java. If you're from a Python/R/Scala background you'll feel right at home. |
 | Java      | You know Java, in this repository we currently use Java `1.8`. |
 | Bash      | Unix shell and command language primarily used for setting up things in each project. |
@@ -24,6 +24,13 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | Python    | Interpreted, high-level, general-purpose programming language. Currently used primarily in conjunction with LocalStack's Local AWS CLI.  |
 
 ## Examples Demonstrated in this Repository
+
+### Jenkins React Web-Application [jenkins-doom-react](jenkins-doom-react)
+Builds a Jenkins instance that has the ability to pull in a local [React](https://reactjs.org/) GitHub project, build and run it using Blue Ocean's Jenkins Docker image. For fun, the React application utilizes [DOSBox](https://www.dosbox.com/) to let you play [Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game) in your browser!
+
+### Jenkins Spring Boot ([simple-jenkins](simple-jenkins))
+Builds a Jenkins instance that has the ability to pull in a GitHub project, build and run it using Blue Ocean's Jenkins Docker image.
+
 ### Spring Boot Microservice Docker Deploy ([simple-springboot-docker](simple-springboot-docker))
 Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory audit logging (H2) of REST endpoints.
 
@@ -49,8 +56,8 @@ Code is written just need to package it nicely :)
 * [ ] **Jenkins Instances with Master/Slave Communication**: To supply a full fledged local Jenkins environment.
 * [ ] **Kubernetes**: Open-source system for automating deployment, scaling, and management of containerized applications.
 * [ ] **Web UI/Visualizations**: Local React, Vue, Angular, whatever new JavaScript framework is out there to show different ways of interacting with backend services and visualizing data. Libraries such as D3js, Echarts and Google Charts will most likely be explored to hopefully ensure your clients tech stack lines up.
-* [ ] **Databases**: PostgreSQL, MySQL and other NoSQL databases. 
-* [ ] **All the things!**: This should be a living repository and updated to help others with their own local development. 
+* [ ] **Databases**: PostgreSQL, MySQL and other NoSQL databases.
+* [ ] **All the things!**: This should be a living repository and updated to help others with their own local development.
 
 ## Installing Necessary Dependencies
 _Dependencies can also be installed through other mechanisms but we primarily use `brew` in this repository, just go with what's easiest for you! If you do not have Homebrew on your machine try executing the following command to install it `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` or differ to the installation script explained under "Option 2 Install Dependencies Using Script"_
