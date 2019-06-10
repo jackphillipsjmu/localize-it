@@ -40,7 +40,12 @@ _**NOTE**: This currently only creates a Jenkins "master" instance without any "
 Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory audit logging (H2) of REST endpoints.
 
 ### Weather Alert Service ([weather-alerts](weather-alerts))
-Intended to display an end-to-end solution for processing Weather Alert data using a local testing environment that includes a multitude of cloud components while showing other useful examples interacting with different APIs, SDKs and frameworks.
+Intended to display an end-to-end solution for processing Weather Alert data using a local testing environment that includes a multitude of cloud components while showing other useful examples interacting with different APIs, SDKs and frameworks. Some components used here are:
+- Spring Boot
+- Kafka
+- Elasticsearch
+- AWS Lambda
+- AWS S3
 
 ### S3 Lambda ([simple-s3-lambda](simple-s3-lambda))
 Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. This is similar to the [D&A Serverless Lambda Challenge](https://techchallenge.captechlab.com/data-engineering/Serverless.Assignment-1.Lambda-Introduction).
