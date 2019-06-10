@@ -14,14 +14,16 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | Spring Boot   | Makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". |
 | Docker        | Container platform to securely build, share and run any application, anywhere. |
 | Gradle        | Build automation system that is the "next iteration" of Maven |
+| React         | Popular JavaScript library for building user interfaces |
 
 | **Language** | **Description** |
 |:---------:|-----------------|
 | Kotlin    | The default Android programming language built on the JVM. Kotlin solves a bunch of issues seen in Java providing a enjoyable functional programming experience that is completely backwards compatible with Java. If you're from a Python/R/Scala background you'll feel right at home. |
-| Java      | You know Java, in this repository we currently use Java `1.8`. |
-| Bash      | Unix shell and command language primarily used for setting up things in each project. |
-| Groovy    | JVM based language primarily used in Gradle to build projects (Kotlin is quickly gaining traction over Groovy so hop on the Kotlin train!). |
-| Python    | Interpreted, high-level, general-purpose programming language. Currently used primarily in conjunction with LocalStack's Local AWS CLI.  |
+| Java       | You know Java, in this repository we currently use Java `1.8`. |
+| JavaScript | Used primarily for Node/Web related functionality. |
+| Bash       | Unix shell and command language primarily used for setting up things in each project. |
+| Groovy     | JVM based language primarily used in Gradle to build projects (Kotlin is quickly gaining traction over Groovy so hop on the Kotlin train!). |
+| Python     | Interpreted, high-level, general-purpose programming language. Currently used primarily in conjunction with LocalStack's Local AWS CLI.  |
 
 ## Examples Demonstrated in this Repository
 
@@ -56,7 +58,7 @@ Code is written just need to package it nicely :)
 * [ ] **API Gateway**: Both AWS ([AWS API Gateway](https://aws.amazon.com/api-gateway/)) and Netflix ([Zuul](https://github.com/Netflix/zuul), [Eureka](https://github.com/Netflix/eureka)) flavors.
 * [ ] **Jenkins Instances with Master/Slave Communication**: To supply a full fledged local Jenkins environment.
 * [ ] **Kubernetes**: Open-source system for automating deployment, scaling, and management of containerized applications.
-* [ ] **Web UI/Visualizations**: Local React, Vue, Angular, whatever new JavaScript framework is out there to show different ways of interacting with backend services and visualizing data. Libraries such as D3js, Echarts and Google Charts will most likely be explored to hopefully ensure your clients tech stack lines up.
+* [ ] **Web UI/Visualizations**: Libraries such as D3js, Echarts and Google Charts will most likely be explored.
 * [ ] **Databases**: PostgreSQL, MySQL and other NoSQL databases.
 * [ ] **All the things!**: This should be a living repository and updated to help others with their own local development.
 
