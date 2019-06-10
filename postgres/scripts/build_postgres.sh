@@ -104,6 +104,8 @@ function setupExampleDatabaseAndTable {
 
 # Checks to see if docker is running and if so will build the docker instance
 function buildPostgres {
+  # Create Log directory if it does NOT exist
+  mkdir -p $LOG_DIR
   # If Docker is running then build the image
   if dockerRunning; then
     # Remove docker postgres container then rerun
