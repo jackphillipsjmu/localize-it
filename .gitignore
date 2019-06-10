@@ -22,3 +22,4 @@ weather-alerts/com-alert-lambda/.gradle/**
 weather-alerts/com-alert-microservice/build/**
 weather-alerts/com-alert-microservice/.idea/**
 weather-alerts/com-alert-microservice/.gradle/**
+postgres/resources/tmp/**
