@@ -28,7 +28,7 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 ## Examples Demonstrated in this Repository
 
 ### Jenkins React Web-Application ([jenkins-doom-react](jenkins-doom-react))
-Builds a Jenkins instance that has the ability to pull in a local [React](https://reactjs.org/) GitHub project, build and run it using Blue Ocean's Jenkins Docker image. For fun, the React application utilizes [DOSBox](https://www.dosbox.com/) to let you play [Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game) in your browser!
+Builds a Jenkins instance that has the ability to pull in a local [React](https://reactjs.org/) GitHub project, build and run it using Blue Ocean's Jenkins Docker image. For fun, the React application utilizes [DOSBox](https://www.dosbox.com/) to let you play Doom in your browser!
 
 
 ### Jenkins Spring Boot ([simple-jenkins](simple-jenkins))
