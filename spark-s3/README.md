@@ -1,5 +1,5 @@
 # spark-s3
-Using Apache Spark this project will pull in a S3 CSV file that contains Census data, transform it, then pushe it to an S3 sink bucket afterwards. This builds upon another project that processes Census data, `simple-s3-lambda`, but does the processing using Spark! For a refresher, here is what happens under the hood in terms of data transformation:
+Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 CSV file that contains Census data, transform it, then push it to an S3 sink bucket afterwards. This is the same functionality that is contained in another project, `simple-s3-lambda`, but cuts out the Lambda portion and does the data processing using using Spark! For a refresher, here is what happens under the hood in terms of data transformation:
 - Remove any line items that have a TotalPop of zero.
 - For each line item, sum the columns Hispanic, White, Black, Native, Asian and Pacific and subtract the sum from 100. Put this number in a new column named OtherEthnicity.
 - For each line item, the following columns will be dropped: `TotalPop`, `Citizen`, `Income`, `IncomeErr`, `IncomePerCap`, `IncomePerCapErr`, `Poverty`, `ChildPoverty`, `Drive`, `Carpool`, `Transit`, `Walk`, `OtherTransp`, `WorkAtHome`, `MeanCommute`.
@@ -21,6 +21,3 @@ Using Apache Spark this project will pull in a S3 CSV file that contains Census 
 - [LocalStack Web Console](http://localhost:8080)
 - [LocalStack AWS S3 Endpoint](http://localhost:4572)
 - Logs can be found locally at `$PROJECT_DIR/spark-to-s3/resources/tmp`
-
-
-### Gotchas

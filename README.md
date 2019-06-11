@@ -53,8 +53,8 @@ Creates local S3 buckets and Lambda function to operate on CSV Census data that 
 ### PostgreSQL ([postgres](postgres))
 Creates a Docker container that contains a PostgreSQL instance which is populated with an example database, table and table data.
 
-### Spark _(Coming Soon!)_
-Code is written just need to package it nicely :)
+### Spark S3 ([spark-s3](spark-s3)))
+Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 CSV file that contains Census data, transform it, then push it to an S3 sink bucket afterwards. This is the same functionality that is contained in another project, `simple-s3-lambda`, but cuts out the Lambda portion and does the data processing using using Spark!
 
 ### Future Examples to Implement
 
