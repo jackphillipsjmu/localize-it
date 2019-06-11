@@ -53,7 +53,7 @@ function startLocalStack {
   # if you would like to run it on other machines try the simpler command
   # $ docker-compose up
   LOCAL_STACK_COMPOSE_PATH="../resources/docker/docker-localstack-compose.yml"
-  TMPDIR=/private$TMPDIR docker-compose -f $LOCAL_STACK_COMPOSE_PATH up > "$LOG_DIR/localstack_`date +%s`.log" 2>&1 &
+  TMPDIR=/private$TMPDIR docker-compose -f $LOCAL_STACK_COMPOSE_PATH up > "$LOG_DIR/spark-to-s3_`date +%s`.log" 2>&1 &
 }
 
 # Create a S3 bucket

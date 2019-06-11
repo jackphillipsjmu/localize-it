@@ -4,11 +4,8 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import spark.to.s3.processor.census.spark.SparkProcessor;
-import spark.to.s3.processor.exception.DataProcessingException;
 import spark.to.s3.utils.CommonUtil;
 import spark.to.s3.utils.S3Util;
-
-import java.net.URL;
 
 /**
  * Driver class to show how to read in Census data, process it, write it to an S3 bucket and then retrieve that data

@@ -20,14 +20,15 @@ import java.util.Arrays;
  * - For each line item, drop all columns not found in the output file format in Appendix B.
  */
 public class SparkProcessor implements DataProcessor<Dataset<Row>> {
-    // Final values that must always be passed in when creating this processor
-    private final SparkSession sparkSession; // Allows Spark operations to occur
-    private final String dataPath;           // Path to Data that will be processed
-
-    String[] DROP_COLUMNS = new String[]{
+    // Constant
+    private static final String[] DROP_COLUMNS = new String[]{
             "TotalPop", "Citizen", "Income", "IncomeErr", "IncomePerCap", "IncomePerCapErr", "Poverty",
             "ChildPoverty", "Drive", "Carpool", "Transit", "Walk", "OtherTransp", "WorkAtHome", "MeanCommute"
     };
+
+    // Final values that must always be passed in when creating this processor
+    private final SparkSession sparkSession; // Allows Spark operations to occur
+    private final String dataPath;           // Path to Data that will be processed
 
     /**
      * Constructor for Spark Processor if either parameter is null a {@link DataProcessingException} will be thrown.

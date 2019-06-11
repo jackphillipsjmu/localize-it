@@ -20,6 +20,13 @@ public final class S3Util {
     private static final String S3_A_PREFIX = "s3a://";
 
     /**
+     * Private default constructor, singleton.
+     */
+    private S3Util() {
+        // No instantiation, just use the methods below!
+    }
+
+    /**
      * Creates a local Spark S3 session for use when reading S3 data
      *
      * @param appName   application name for Spark Session
@@ -37,13 +44,9 @@ public final class S3Util {
         final String master = CommonUtil.defaultIfNull(masterUrl, LOCAL_MASTER);
         final Boolean local = CommonUtil.defaultIfNull(isLocal, true);
 
-        // conf.set("fs.hdfs.impl", classOf[org.apache.hadoop.hdfs.DistributedFileSystem].getName);
-        //conf.set("fs.file.impl", classOf[org.apache.hadoop.fs.LocalFileSystem].getName);
         // Base Spark Session Builder
         SparkSession sparkSession = SparkSession.builder()
                 .appName(applicationName)
-//                .config("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem")
-//                .config("fs.file.impl", "org.apache.hadoop.fs.LocalFileSystem")
                 .master(master)
                 .getOrCreate();
         // Set log level to ERROR so we aren't clogging up our log data
@@ -59,7 +62,7 @@ public final class S3Util {
      * @param sparkSession entry point to programming Spark with Datasets
      * @return SparkSession with S3 configurations set
      */
-    public static SparkSession localS3Setup(SparkSession sparkSession) {
+    private static SparkSession localS3Setup(SparkSession sparkSession) {
         // Sanity null checks, in Kotlin if there is no elvis operator on the parameter then it must not be null
         CommonUtil.ifNullThrowException(sparkSession, new DataProcessingException("Cannot Setup Local Spark S3 Configuration!"));
 
@@ -115,18 +118,8 @@ public final class S3Util {
         if (CommonUtil.isNullOrEmpty(bucketName)) {
             throw new DataProcessingException("Cannot build S3 Bucket path from null/empty data");
         }
-
-        // Build the path to S3 appending necessary components as needed
-        StringBuilder builder = new StringBuilder();
-        if (bucketName.startsWith(S3_A_PREFIX)) {
-            builder.append(bucketName);
-        } else {
-            builder.append(S3_A_PREFIX).append(bucketName);
-        }
-        // Create the final bits of the path, the result should be something similar to:
-        // s3a://spark-sink-bucket/output_1560269886384.csv
-        return builder.append("/output_")
-                .append(new Date().getTime()).
-                        append(".csv").toString();
+        // Build generated file name and then build path to it
+        final String fileName = "/output" + new Date().getTime() + ".csv";
+        return bucketName.startsWith(S3_A_PREFIX) ? bucketName + fileName : S3_A_PREFIX + bucketName + fileName;
     }
 }

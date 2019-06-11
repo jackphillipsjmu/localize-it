@@ -48,18 +48,6 @@ public class CommonUtil {
     }
 
     /**
-     * If the provided left hand String is null or empty then the default String is returned, otherwise, the
-     * left hand String is returned.
-     *
-     * @param str String to check if its null or empty
-     * @param defaultStr String to default to if left hand String is empty or null
-     * @return String either the populated left hand String or default String
-     */
-    public static String defaultIfNullOrEmpty(final String str, final String defaultStr) {
-        return isNullOrEmpty(str) ? defaultStr : str;
-    }
-
-    /**
      * Determines if the provided String is null or empty.
      *
      * @param str String to evaluate
