@@ -128,9 +128,7 @@ function refreshAwsResources {
 
 # Run the JAR that is packaged up with our Spark code
 function runJar {
-  # java -jar -DSINK_BUCKET=$SINK_BUCKET -DCENSUS_DATA=$"s3a://$SOURCE_DATA_PATH" $SPARK_PROJECT_JAR
-  java -jar -DSINK_BUCKET=$SINK_BUCKET $SPARK_PROJECT_JAR
-
+  java -jar -DSINK_BUCKET=$SINK_BUCKET -DCENSUS_DATA=$"s3a://$SOURCE_DATA_PATH" $SPARK_PROJECT_JAR
 }
 
 # Check, build and run Spark process
