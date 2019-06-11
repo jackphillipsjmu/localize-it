@@ -61,7 +61,7 @@ public final class S3Util {
      * @return SparkSession with S3 configurations set
      */
     private static SparkSession localS3Setup(SparkSession sparkSession) {
-        // Sanity null checks, in Kotlin if there is no elvis operator on the parameter then it must not be null
+        // Sanity null checks
         CommonUtil.ifNullThrowException(sparkSession, new DataProcessingException("Cannot Setup Local Spark S3 Configuration!"));
 
         // Disable MD5 Checking which is necessary at this time when using LocalStack
@@ -98,7 +98,7 @@ public final class S3Util {
      * @return Dataset containing S3 CSV data
      */
     public static Dataset<Row> readS3CSVFile(SparkSession sparkSession, final String s3Path) {
-        // Sanity null checks, in Kotlin if there is no elvis operator on the parameter then it must not be null
+        // Sanity null checks
         CommonUtil.ifNullThrowException(sparkSession, new DataProcessingException("Cannot Read CSV File from S3 due to a null SparkSession"));
         CommonUtil.ifNullThrowException(s3Path, new DataProcessingException("Cannot Read CSV File from null S3 file path"));
         // Read in the CSV data, it is assumed a header is present in the file
