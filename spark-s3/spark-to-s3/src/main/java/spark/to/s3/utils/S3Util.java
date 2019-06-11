@@ -38,8 +38,6 @@ public final class S3Util {
                                                          final String masterUrl,
                                                          final Boolean isLocal) {
         // Ensure we have values and populate with defaults if necessary
-        // if we didn't implement these checks in the CommonUtil class it would need to be
-        // performed explicitly but comes out of the box as default with Kotlin
         final String applicationName = CommonUtil.defaultIfNull(appName, APP_NAME);
         final String master = CommonUtil.defaultIfNull(masterUrl, LOCAL_MASTER);
         final Boolean local = CommonUtil.defaultIfNull(isLocal, true);
