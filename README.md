@@ -51,11 +51,11 @@ Intended to display an end-to-end solution for processing Weather Alert data usi
 ### S3 Lambda ([simple-s3-lambda](simple-s3-lambda))
 Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. This is similar to the [D&A Serverless Lambda Challenge](https://techchallenge.captechlab.com/data-engineering/Serverless.Assignment-1.Lambda-Introduction).
 
-### PostgreSQL ([postgres](postgres))
-Creates a Docker container that contains a PostgreSQL instance which is populated with an example database, table and table data.
-
 ### Spark S3 ([spark-s3](spark-s3))
 Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 CSV file that contains Census data, transform it, then push it to an S3 sink bucket afterwards. This is the same functionality that is contained in another project, `simple-s3-lambda`, but cuts out the Lambda portion and does the data processing using using Spark!
+
+### PostgreSQL ([postgres](postgres))
+Creates a Docker container that contains a PostgreSQL instance which is populated with an example database, table and table data.
 
 ### Future Examples to Implement
 
