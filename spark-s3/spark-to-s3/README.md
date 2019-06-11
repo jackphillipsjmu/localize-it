@@ -1,25 +1,28 @@
-# Example Microservice Written in Spring Boot
-Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory audit logging of REST endpoints.
+# spark-s3
+Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 CSV file that contains Census data, transform it, then push it to an S3 sink bucket afterwards. This is the same functionality that is contained in another project, `simple-s3-lambda`, but cuts out the Lambda portion and does the data processing using using Spark! For a refresher, here is what happens under the hood in terms of data transformation:
+- Remove any line items that have a TotalPop of zero.
+- For each line item, sum the columns Hispanic, White, Black, Native, Asian and Pacific and subtract the sum from 100. Put this number in a new column named OtherEthnicity.
+- For each line item, the following columns will be dropped: `TotalPop`, `Citizen`, `Income`, `IncomeErr`, `IncomePerCap`, `IncomePerCapErr`, `Poverty`, `ChildPoverty`, `Drive`, `Carpool`, `Transit`, `Walk`, `OtherTransp`, `WorkAtHome`, `MeanCommute`.
 
-### Current functionality Includes
-- Automated POJO generation with Swagger and JPA related annotations.
-- Logging of request/responses to controller endpoints using web filter.
-- Example controller, service and repository classes.
-- [Swagger UI](http:localhost:8089/swagger-ui.html) to run REST endpoints from your browser.
+## Current Execution Flow
+- By executing the script located at `$PROJECT_DIR/spark-s3/scripts/build_spark_to_s3.sh` it will perform the actions listed below:
+  - Check environment to ensure that Docker and LocalStack are running and attempt to resolve what it can.
+  - Removes any existing S3 source/sink buckets (`spark-source-bucket`, `spark-sink-bucket`) and recreates them to ensure that we have a fresh run with each build.
+  - Pushes `$PROJECT_DIR/spark-to-s3/src/main/resources/census_data.csv` to `spark-source-bucket`.
+  - Builds Spark Gradle project and produces a _"fat/shadow JAR"_ to package all of our dependencies together.
+  - Runs Spark code which is printed out to the console.
 
-- **Current Execution Flow**
-  - By executing the script located at `$PROJECT_DIR/simple-springboot-docker/scripts/build_simple_docker.sh` it will perform the actions listed below:
-    - Check that Docker is running and if not will prompt the user if they would like to start Docker (_Currently Mac OS only for start functionality_).
-    - Once verification that Docker is running existing Docker containers matching the name `simple_springboot_docker` will be removed to ensure you are always deploying the latest and greatest.
-    - Spring Boot Gradle project is built and the underlying `docker-compose.yml` file is run.
-    - Information about the service including Swagger UI and documentation will be printed to the terminal window.
+### What's Happening Where?
+- `spark.to.s3.SparkToS3Driver`: Class that is the main entry point of the code and will attempt to retrieve System properties to override internal default values. This calls the underlying classes to read, process and write out the data.
+- `spark.to.s3.processor.census.spark.SparkProcessor`: Responsible for reading in the CSV data, transforming and writing it out using Spark. However, this is agnostic of S3 since the Spark operations performed have no tie to it making it pretty portable.  
+- `spark.to.s3.utils.S3Util`: Utility class to work with S3 and setup how Spark is configured to do so.
 
 ## Build Project
-- Build the project using either your locally installed Gradle instance or the Gradle wrapper supplied in this repository `./gradlew build`
-- Run the service either from your IDE or the command line `./gradlew bootRun`
-- Go into your browser of choice and and navigate the [Swagger UI](http:localhost:8089/swagger-ui.html) to see and run established REST endpoints.
+- Build the project using either your locally installed Gradle instance or the Gradle wrapper supplied in this repository `./gradlew clean build`
+- Run the service either from your IDE or the command line `java -jar -DSINK_BUCKET=$SINK_BUCKET -DCENSUS_DATA=$"s3a://$SOURCE_DATA_PATH" ./spark-to-s3/build/libs/spark-to-s3-all.jar`
+- Watch it run in your console!
 
 ### References
-  - [Swagger UI](http://localhost:8089/swagger-ui.html) can be used to run REST endpoints from your browser.
-  - [Auto Generated Documentation](http://localhost:8089/index.html) is used as reference to what the service offers.
-  - Logs can be found locally at `$PROJECT_DIR/simple-springboot-docker/resources/tmp`
+- [LocalStack Web Console](http://localhost:8080)
+- [LocalStack AWS S3 Endpoint](http://localhost:4572)
+- Logs can be found locally at `$PROJECT_DIR/spark-to-s3/resources/tmp`
