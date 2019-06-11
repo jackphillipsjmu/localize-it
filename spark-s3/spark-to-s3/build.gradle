@@ -1,0 +1,62 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '4.0.4'
+}
+
+// Plugins
+apply plugin: 'java'
+apply plugin: 'jacoco'
+// IDE
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+// Shadow JAR
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+group 'spark.to.s3'
+//version '0.0.1'
+sourceCompatibility = 1.8
+mainClassName = 'spark.to.s3.SparkToS3Driver'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spark Dependencies
+    compile group: 'org.apache.spark', name: 'spark-core_2.12', version: '2.4.3'
+    compile group: 'org.apache.spark', name: 'spark-sql_2.12', version: '2.4.3'
+
+    // AWS S3
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.548'
+
+    // Hadoop AWS
+    compile group: 'org.apache.hadoop', name: 'hadoop-aws', version: '3.2.0'
+
+    // Hadoop Common
+    compile('org.apache.hadoop:hadoop-common:3.2.0')
+
+    // Hadoop HDFS
+    compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: '3.2.0'
+}
+
+configurations {
+    all {
+        resolutionStrategy {
+            // Must force Jackson Version due to conflicts with Hadoop Common/Spark Library
+            force 'com.fasterxml.jackson.core:jackson-core:2.6.7', 'com.fasterxml.jackson.core:jackson-databind:2.6.7'
+        }
+    }
+}
+
+// Jacoco Test Reports
+jacoco {
+    toolVersion = "0.7.9"
+    reportsDir = file("${buildDir}/reports/jacoco")
+}
+
+
+// Packages all of our dependencies in a executable JAR
+shadowJar {
+    zip64 true
+    baseName = 'spark-to-s3'
+}

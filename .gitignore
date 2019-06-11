@@ -14,6 +14,10 @@ simple-s3-lambda/resources/tmp/**
 simple-s3-lambda/com-dna-challenge/build/**
 simple-s3-lambda/com-dna-challenge/.idea/**
 simple-s3-lambda/com-dna-challenge/.gradle/**
+spark-s3/resources/tmp/**
+spark-s3/spark-to-s3/build/**
+spark-s3/spark-to-s3/.idea/**
+spark-s3/spark-to-s3/.gradle/**
 simple-springboot-docker/resources/tmp/**
 weather-alerts/resources/tmp/**
 weather-alerts/com-alert-lambda/build/**
