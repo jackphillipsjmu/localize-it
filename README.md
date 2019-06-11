@@ -16,6 +16,7 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | Gradle        | Build automation system that is the "next iteration" of Maven |
 | React         | Popular JavaScript library for building user interfaces |
 | PostgreSQL    | Relational Database |
+| Spark         | Unified analytics engine for large-scale data processing. |
 
 | **Language** | **Description** |
 |:---------:|-----------------|
@@ -53,7 +54,7 @@ Creates local S3 buckets and Lambda function to operate on CSV Census data that 
 ### PostgreSQL ([postgres](postgres))
 Creates a Docker container that contains a PostgreSQL instance which is populated with an example database, table and table data.
 
-### Spark S3 ([spark-s3](spark-s3)))
+### Spark S3 ([spark-s3](spark-s3))
 Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 CSV file that contains Census data, transform it, then push it to an S3 sink bucket afterwards. This is the same functionality that is contained in another project, `simple-s3-lambda`, but cuts out the Lambda portion and does the data processing using using Spark!
 
 ### Future Examples to Implement
