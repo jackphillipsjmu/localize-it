@@ -5,17 +5,17 @@ This service is intended to display an end-to-end solution for processing Weathe
 - Pulls in Weather Alert Atom Feed Data from weather.gov either through a REST API call or on a preconfigured schedule if enabled.
 - Transforms Weather Alert Data and sends it to a Kafka topic if enabled.
 - Kafka Consumer/Listener will retrieve topic data and push it to Elasticsearch if enabled. The way in which the data is indexed will automatically either insert a new document or update an existing one if it exists.
-- Transforms the Weather Alert data again into CSV format and pushes it to an S3 source bucket. 
+- Transforms the Weather Alert data again into CSV format and pushes it to an S3 source bucket.
 - The source bucket where the Alert CSV data is pushed to has a AWS Lambda function tied to it to copy the contents into a predefined sink bucket.
   - This Lambda function is worth checking out as well and is located in the `$BASE_DIR/localize-it/com-alert-lambda` directory. It mixes both Java and Kotlin code to show how the two languages can work hand in hand even in a cloud environment!
 - [Swagger UI](http://localhost:8081/swagger-ui.html) can be used to run REST endpoints from your browser.
-  - **Note**: When running the end-to-end process the code will attempt to resolve all configurations and environmental dependencies such as Lambda function and S3 bucket creation. However, this does require a running LocalStack instance which is defined below. 
+  - **Note**: When running the end-to-end process the code will attempt to resolve all configurations and environmental dependencies such as Lambda function and S3 bucket creation. However, this does require a running a LocalStack instance which is defined below.
 
 ## Microservice Components
 Section outlines different aspects of this services components in greater detail to clarify what is being used internally at a high level.
 
 ### General
-- **Spring Boot**: Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". This framework is very popular to run as Microservices because Spring Boot creates portable code that can easily be pushed to a Docker container. 
+- **Spring Boot**: Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". This framework is very popular to run as Microservices because Spring Boot creates portable code that can easily be pushed to a Docker container.
 - **REST Interface**: This application uses the Representational State Transfer (REST) software architectural style. This defines a set of constraints to be used for creating Web services. Web services that conform to the REST architectural style, called RESTful Web services (RWS), provide interoperability between computer systems on the Internet. RESTful Web services allow the requesting systems to access and manipulate textual representations of Web resources by using a uniform and predefined set of stateless operations. Other kinds of Web services, such as _SOAP Web services_, expose their own arbitrary sets of operations.
 - **Scheduled Processing**: Service will process alert data on a set interval/schedule if enabled by setting the `weather.alert.scheduler.enabled` property to `true`. This offers a chance to show how to use Spring's `@EnableScheduling` and `@Scheduled` annotations in a straightforward manner. Also, the full end-to-end process can be kicker off using the REST API.
 - [Swagger UI](http://localhost:8081/swagger-ui.html) to see and run REST endpoints in your browser after the project is built and run.
@@ -29,10 +29,10 @@ Section outlines different aspects of this services components in greater detail
   - **S3 (Simple Storage Service)**: Scalable object storage service that integrates with many AWS services and solutions. S3 stores your data as objects that consist of data and optional metadata that describes the file within buckets.
     - This application includes AWS S3 Controller and Service classes to help show how you can use the AWS Java SDK to perform general S3 operations.
     - Basic S3 bucket/file listings can be seen in your browser by heading to [http://localhost:4572](http://localhost:4572)
-    - The default path to the weather alert sink bucket is [http://localhost:4572/alert-source-bucket](http://localhost:4572/alert-source-bucket) while the path to the sink bucket is [http://localhost:4572/alert-sink-bucket](http://localhost:4572/alert-sink-bucket) 
+    - The default path to the weather alert sink bucket is [http://localhost:4572/alert-source-bucket](http://localhost:4572/alert-source-bucket) while the path to the sink bucket is [http://localhost:4572/alert-sink-bucket](http://localhost:4572/alert-sink-bucket)
   - **Lambda**: Serverless code executor that allows you to run code for virtually any type of application or backend service with zero administration over server instances. These functions can be event driven and triggered by AWS services or direct calls.
     - This application includes AWS Lambda Controller and Service classes to help show how you can use the AWS Java SDK to perform general Lambda operations.
-    - URL for local AWS Lambda is [http://localhost:4574](http://localhost:4574) but for an up to date list of Lambdas use the LocalStack web-console or utilize the applications Lambda REST controller to get information. 
+    - URL for local AWS Lambda is [http://localhost:4574](http://localhost:4574) but for an up to date list of Lambdas use the LocalStack web-console or utilize the applications Lambda REST controller to get information.
   - **Elasticsearch**: Elasticsearch is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents.
     - Configuration and Service classes provided in this repository to show how to setup, search and index data into Elasticsearch. This utilizes Elasticsearch's High Level REST Client so verbose query creation can be shown including fuzzy search capabilities.
     - Can be toggled on/off setting the `weather.alert.elasticsearch.enabled` property to `true` or `false`.
@@ -71,14 +71,14 @@ It is suggested that you run the `$BASE_DIR/localize-it/weather-alerts/scripts/r
 
 ### External Components
 #### LocalStack
-- From the command line execute `$ docker-compose -f $BASE_DIR/localize-it/weather-alerts/resources/docker/docker-localstack-compose.yml up` 
-- If this command does not work properly try running `TMPDIR=/private$TMPDIR docker-compose -f $BASE_DIR/localize-it/weather-alerts/resources/docker/docker-localstack-compose.yml up` 
+- From the command line execute `$ docker-compose -f $BASE_DIR/localize-it/weather-alerts/resources/docker/docker-localstack-compose.yml up`
+- If this command does not work properly try running `TMPDIR=/private$TMPDIR docker-compose -f $BASE_DIR/localize-it/weather-alerts/resources/docker/docker-localstack-compose.yml up`
 
-#### Start Kafka 
+#### Start Kafka
 - From the command line execute `$ docker-compose -f $BASE_DIR/localize-it/weather-alerts/resources/docker/docker-kafka-compose.yml up`
   - When using the Docker Compose route it will create a topic called `test` by default for you to mess around with but will not be used by this service.
   - You may also install and run Kafka manually using their [quickstart documentation](https://kafka.apache.org/quickstart).
-  
+
 ### Local Components
 #### Build AWS Lambda Project
 - Change into the `$BASE_DIR/localize-it/com-alert-lambda` directory.
@@ -86,7 +86,7 @@ It is suggested that you run the `$BASE_DIR/localize-it/weather-alerts/scripts/r
 
 #### Build and Run Microservice
 - Change into the `$BASE_DIR/localize-it/com-alert-microservice` directory.
-- Execute `./gradlew clean build` to build the application. 
+- Execute `./gradlew clean build` to build the application.
 - After that has completed run the following if you want to set the AWS Lambda JAR environment variable explicitly `./gradlew bootRun "-DLAMBDA_JAR_PATH=<PATH-TO>/com-alert-lambda/build/libs/com-alert-lambda-0.1.jar"` or if you've set this up in the `application.properties` simply run `./gradlew bootRun`
 - Once running it should deploy to [http://localhost:8081](http://localhost:8081)
   - Note, you can go into your browser of choice and and navigate the [Swagger UI](http://localhost:8081/swagger-ui.html) to see and run REST endpoints directly once the application is running.
