@@ -18,6 +18,7 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | PostgreSQL    | Relational Database |
 | Spark         | Unified analytics engine for large-scale data processing. |
 | Debezium  | Debezium is an open source distributed platform for change data capture. Start it up, point it at your databases, and your apps can start responding to all of the inserts, updates, and deletes that other apps commit to your databases. Debezium is durable and fast, so your apps can respond quickly and never miss an event, even when things go wrong. |
+| SonarQube | SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically. Using static code analysis it can identify security risks, bugs and code smells that you can configure yourself! |
 
 | **Language** | **Description** |
 |:---------:|-----------------|
@@ -64,9 +65,12 @@ Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 C
 ### PostgreSQL ([postgres](postgres))
 Creates a Docker container that contains a PostgreSQL instance which is populated with an example database, table and table data.
 
+### SonarQube ([sonar](sonar))
+Creates two Docker containers that contain a SonarQube instance and a corresponding PostgreSQL backend to support it. SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically. Using static code analysis it can identify security risks, bugs and code smells that you can configure yourself!
+
 ### Future Examples to Implement
 
-* [ ] **Sonar**: Performs static code analysis to ensure code quality.
+* [ ] **SonarQube with Code Monitoring**: Utilize the power of SonarQube to analyze application code and trigger events if issues arise.
 * [ ] **GraphQL**: Query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
 * [ ] **API Gateway**: Both AWS ([AWS API Gateway](https://aws.amazon.com/api-gateway/)) and Netflix ([Zuul](https://github.com/Netflix/zuul), [Eureka](https://github.com/Netflix/eureka)) flavors.
 * [ ] **Jenkins Instances with Master/Slave Communication**: To supply a full fledged local Jenkins environment.
