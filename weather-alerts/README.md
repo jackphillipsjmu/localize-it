@@ -9,7 +9,7 @@ This service is intended to display an end-to-end solution for processing Weathe
 - The source bucket where the Alert CSV data is pushed to has a AWS Lambda function tied to it to copy the contents into a predefined sink bucket.
   - This Lambda function is worth checking out as well and is located in the `$BASE_DIR/localize-it/com-alert-lambda` directory. It mixes both Java and Kotlin code to show how the two languages can work hand in hand even in a cloud environment!
 - [Swagger UI](http://localhost:8081/swagger-ui.html) can be used to run REST endpoints from your browser.
-  - **Note**: When running the end-to-end process the code will attempt to resolve all configurations and environmental dependencies such as Lambda function and S3 bucket creation. However, this does require a running LocalStack instance which is defined below.
+  - **Note**: When running the end-to-end process the code will attempt to resolve all configurations and environmental dependencies such as Lambda function and S3 bucket creation. However, this does require a running a LocalStack instance which is defined below.
 
 ## Microservice Components
 Section outlines different aspects of this services components in greater detail to clarify what is being used internally at a high level.
