@@ -17,6 +17,7 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | React         | Popular JavaScript library for building user interfaces |
 | PostgreSQL    | Relational Database |
 | Spark         | Unified analytics engine for large-scale data processing. |
+| Debezium  | Debezium is an open source distributed platform for change data capture. Start it up, point it at your databases, and your apps can start responding to all of the inserts, updates, and deletes that other apps commit to your databases. Debezium is durable and fast, so your apps can respond quickly and never miss an event, even when things go wrong. |
 
 | **Language** | **Description** |
 |:---------:|-----------------|
@@ -42,6 +43,9 @@ Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory
 
 ### Dockerized Kafka ([simple-kafka](simple-kafka))
 Creates a Docker container that contains a Kafka instance and creates a topic `test` to play around with. Also describes basic example commands to run against Kafka to create/list topics and produce/consume data.
+
+### CDC with Dockerized PostgreSQL, Debezium and Kafka ([postgres-kafka-cdc](postgres-kafka-cdc))
+Highlights data streaming and change data capture (CDC) basics by creating local Docker containers that run [Zookeeper](https://zookeeper.apache.org/), [Kafka](https://kafka.apache.org/) and [PostgreSQL](https://www.postgresql.org/). The PostgreSQL instance has [Debezium](https://debezium.io/) configured to perform change data capture on the database to push changes to a Kafka topic.
 
 ### Weather Alert Service ([weather-alerts](weather-alerts))
 Intended to display an end-to-end solution for processing Weather Alert data using a local testing environment that includes a multitude of cloud components while showing other useful examples interacting with different APIs, SDKs and frameworks. Some components used here are:

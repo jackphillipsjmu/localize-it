@@ -28,3 +28,4 @@ weather-alerts/com-alert-microservice/.idea/**
 weather-alerts/com-alert-microservice/.gradle/**
 postgres/resources/tmp/**
 simple-kafka/resources/tmp/**
+postgres-kafka-cdc/resources/tmp/**
