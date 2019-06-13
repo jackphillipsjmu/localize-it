@@ -40,6 +40,9 @@ _**NOTE**: This currently only creates a Jenkins "master" instance without any "
 ### Spring Boot Microservice Docker Deploy ([simple-springboot-docker](simple-springboot-docker))
 Builds and Deploys a Dockerized Spring Boot Microservice that includes in-memory audit logging (H2) of REST endpoints.
 
+### Dockerized Kafka ([simple-kafka](simple-kafka))
+Creates a Docker container that contains a Kafka instance and creates a topic `test` to play around with. Also describes basic example commands to run against Kafka to create/list topics and produce/consume data.
+
 ### Weather Alert Service ([weather-alerts](weather-alerts))
 Intended to display an end-to-end solution for processing Weather Alert data using a local testing environment that includes a multitude of cloud components while showing other useful examples interacting with different APIs, SDKs and frameworks. Some components used here are:
 - Spring Boot
