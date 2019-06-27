@@ -30,3 +30,4 @@ postgres/resources/tmp/**
 simple-kafka/resources/tmp/**
 postgres-kafka-cdc/resources/tmp/**
 sonar/resources/tmp/**
+elasticsearch-kibana/resources/tmp/**

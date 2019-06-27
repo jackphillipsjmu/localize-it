@@ -68,6 +68,9 @@ Creates a Docker container that contains a PostgreSQL instance which is populate
 ### SonarQube ([sonar](sonar))
 Creates two Docker containers that contain a SonarQube instance and a corresponding PostgreSQL backend to support it. SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically. Using static code analysis it can identify security risks, bugs and code smells that you can configure yourself!
 
+### Dockerized Elasticsearch and Kibana ([elasticsearch-kibana](elasticsearch-kibana))
+Creates two Docker containers that contain an Elasticsearch and Kibana instance for use locally. A perfect way to jump into Elasticsearch!
+
 ### Future Examples to Implement
 
 * [ ] **SonarQube with Code Monitoring**: Utilize the power of SonarQube to analyze application code and trigger events if issues arise.
@@ -109,3 +112,6 @@ If you are running this project on a Mac then you can execute the _experimental_
   - Scala
   - Spark
   - Jupyter
+
+### Limitations of LocalStack
+- SNS functionality currently only supports SQS, Lambda and HTTP/HTTPS protocols. This means Email, SMS and Application protocols will not work as intended.
