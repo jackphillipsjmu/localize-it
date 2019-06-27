@@ -1,10 +1,10 @@
 # Elasticsearch and Kibana
 Creates two Docker containers that contain an Elasticsearch and Kibana instance for use locally.
 
-## What is Elasticsearch?
+### What is Elasticsearch?
 Elasticsearch is a search engine based on the Apache Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents. Originally designed to be an open-source Splunk it has expanded to being an absurdly fast indexing NoSQL data store. For more information, checkout the [Elasticsearch Wikipedia Page](https://en.wikipedia.org/wiki/Elasticsearch) for a brief overview.
 
-## What is Kibana?
+### What is Kibana?
 Kibana is an open source data visualization plugin for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data. For more information, checkout the [Kibana Wikipedia Page](https://en.wikipedia.org/wiki/Kibana) for a brief overview.
 
 ### Current Execution Flow

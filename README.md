@@ -109,3 +109,6 @@ If you are running this project on a Mac then you can execute the _experimental_
   - Scala
   - Spark
   - Jupyter
+
+### Limitations of LocalStack
+- SNS functionality currently only supports SQS, Lambda and HTTP/HTTPS protocols. This means Email, SMS and Application protocols will not work as intended.
