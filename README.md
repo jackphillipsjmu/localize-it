@@ -8,7 +8,8 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | :-----------: |-----------------|
 | AWS S3        | Simple Storage Service (S3) stores your data as objects that consist of data and optional metadata that describes the file within buckets. |
 | AWS Lambda    | Serverless code executor that allows you to run code for virtually any type of application or backend service with zero administration over server instances. These functions can be event driven and triggered by AWS services or direct calls. |
-| Elasticsearch | Search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents. Originally designed to be an open-source Splunk it has expanded to being an absurdly fast indexing NoSQL data store. |
+| Elasticsearch | Elasticsearch is a search engine based on the Apache Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents. Originally designed to be an open-source Splunk it has expanded to being an absurdly fast indexing NoSQL data store. For more information, checkout the [Elasticsearch Wikipedia Page](https://en.wikipedia.org/wiki/Elasticsearch) for a brief overview. |
+| Kibana         | Kibana is an open source data visualization plugin for [Elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch). It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data. For more information, checkout the [Kibana Wikipedia Page](https://en.wikipedia.org/wiki/Kibana) for a brief overview. |
 | Kafka         | Used for building real-time data pipelines and streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and runs in production in thousands of companies. Think of all the issues you had with messaging queues and breathe a sigh of relief that Kafka can be used in its place! |
 | Jenkins       | Open source automation server which enables developers around the world to reliably build, test, and deploy their software. |
 | Spring Boot   | Makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". |
@@ -60,7 +61,7 @@ Intended to display an end-to-end solution for processing Weather Alert data usi
 Creates local S3 buckets and Lambda function to operate on CSV Census data that is pushed to a S3 sink bucket which is in turn pulled in via a AWS Lambda function. This is similar to the [D&A Serverless Lambda Challenge](https://techchallenge.captechlab.com/data-engineering/Serverless.Assignment-1.Lambda-Introduction).
 
 ### Spark S3 ([spark-s3](spark-s3))
-Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 CSV file that contains Census data, transform it, then push it to an S3 sink bucket afterwards. This is the same functionality that is contained in another project, `simple-s3-lambda`, but cuts out the Lambda portion and does the data processing using using Spark!
+Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 CSV file that contains Census data, transform it, then push it to an S3 sink bucket afterwards. This is the same functionality that is contained in another project, `simple-s3-lambda`, but cuts out the Lambda portion and does the data processing using Spark!
 
 ### PostgreSQL ([postgres](postgres))
 Creates a Docker container that contains a PostgreSQL instance which is populated with an example database, table and table data.
@@ -71,7 +72,7 @@ Creates two Docker containers that contain a SonarQube instance and a correspond
 ### Dockerized Elasticsearch and Kibana ([elasticsearch-kibana](elasticsearch-kibana))
 Creates two Docker containers that contain an Elasticsearch and Kibana instance for use locally. A perfect way to jump into Elasticsearch!
 
-### Future Examples to Implement
+## Future Examples to Implement
 
 * [ ] **SonarQube with Code Monitoring**: Utilize the power of SonarQube to analyze application code and trigger events if issues arise.
 * [ ] **GraphQL**: Query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
@@ -99,7 +100,7 @@ _Dependencies can also be installed through other mechanisms but we primarily us
 - Install the typical AWS CLI by executing `$ brew install awscli` or with use the `pip3` flavor install by executing `$ pip3 install awscli --upgrade --user`
 - For further AWS CLI installation instructions/references check out [AWS CLI Installation Documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
-#### Option 2 Install Dependencies Using Script (_Experimental_)
+### Option 2 Install Dependencies Using Script (_Experimental_)
 If you are running this project on a Mac then you can execute the _experimental_ install script located here, `$PROJECT_DIR/general/scripts/install.sh`. This script is a work in progress so all dependencies may not be installed properly. If failures occur differ to the _Option 1_ self install to ensure everything is working as expected.
 
 - Currently, the script will attempt to install the following:
