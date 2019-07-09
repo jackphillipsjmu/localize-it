@@ -20,6 +20,7 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | Spark         | Unified analytics engine for large-scale data processing. |
 | Debezium  | Debezium is an open source distributed platform for change data capture. Start it up, point it at your databases, and your apps can start responding to all of the inserts, updates, and deletes that other apps commit to your databases. Debezium is durable and fast, so your apps can respond quickly and never miss an event, even when things go wrong. |
 | SonarQube | SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically. Using static code analysis it can identify security risks, bugs and code smells that you can configure yourself! |
+| Jupyter | Project Jupyter exists to develop open-source software, open-standards, and services for interactive computing across dozens of programming languages. |
 
 | **Language** | **Description** |
 |:---------:|-----------------|
@@ -28,7 +29,7 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | JavaScript | Used primarily for Node/Web related functionality. |
 | Bash       | Unix shell and command language primarily used for setting up things in each project. |
 | Groovy     | JVM based language primarily used in Gradle to build projects (Kotlin is quickly gaining traction over Groovy so hop on the Kotlin train!). |
-| Python     | Interpreted, high-level, general-purpose programming language. Currently used primarily in conjunction with LocalStack's Local AWS CLI.  |
+| Python     | Interpreted, high-level, general-purpose programming language. |
 
 ## Examples Demonstrated in this Repository
 
@@ -72,6 +73,9 @@ Creates two Docker containers that contain a SonarQube instance and a correspond
 ### Dockerized Elasticsearch and Kibana ([elasticsearch-kibana](elasticsearch-kibana))
 Creates two Docker containers that contain an Elasticsearch and Kibana instance for use locally. A perfect way to jump into Elasticsearch!
 
+### Dockerized Jupyter with Spark ([jupyter-spark](jupyter-spark))
+Creates a Docker container that runs a Jupyter instance that supports Spark processing in `Python`, `R` and `Scala`. This is derived from Jupyters own [all-spark-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/specifics.html#apache-spark) Docker Stack and is intended to get individuals started quickly in exploring both Spark and Jupyter.
+
 ## Future Examples to Implement
 
 * [ ] **SonarQube with Code Monitoring**: Utilize the power of SonarQube to analyze application code and trigger events if issues arise.
@@ -92,7 +96,7 @@ _Dependencies can also be installed through other mechanisms but we primarily us
 - Execute `$ docker` from the command line to see if things are installed on your machine.
 - To install Docker/Docker Compose manually refer to [Dockers install documentation](https://docs.docker.com/compose/install/).
 
-**AWS CLI (Local and Typical Clients)**
+**AWS CLI (Local and Typical Clients) if Using AWS Related Projects**
 - Ensure you have Python installed on your machine with `pip`
   - Check out [Pythons installation instructions](https://wiki.python.org/moin/BeginnersGuide/Download) if you're installing Python for the first time.
 - For Mac's execute the following from the command line to retrieve and install the AWS Local CLI which is beneficial for testing = `$ sudo pip install awscli-local --upgrade --ignore-installed six`
