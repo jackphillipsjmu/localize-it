@@ -180,9 +180,3 @@ function buildJupyterSpark {
 
 # Call main function that will setup everything
 buildJupyterSpark
-
-# Copy example Python file to containers work directory
-# NOTEBOOK_WORK_DIR=/home/jovyan/work
-# # echo "docker cp $PYTHON_EXAMPLE_PATH $CONTAINER_NAME:$NOTEBOOK_WORK_DIR/$PYTHON_EXAMPLE_FILE"
-#
-# docker cp $PYTHON_EXAMPLE_PATH "$CONTAINER_NAME:$NOTEBOOK_WORK_DIR/$PYTHON_EXAMPLE_FILE"
