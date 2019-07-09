@@ -1,0 +1,8 @@
+version: '3'
+services:
+  jupyter-spark:
+    image: jupyter/all-spark-notebook
+    container_name: "jupyter_spark_docker"
+    ports:
+      - "8888:8888"
+      - "4040:4040"
