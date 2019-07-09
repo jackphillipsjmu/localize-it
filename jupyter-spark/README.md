@@ -24,6 +24,8 @@ By executing the script located at `$PROJECT_DIR/jupyter-spark/scripts/build_jup
   - **Example Console Output**: `= INFO: You may access the Jupyter Notebook in your Browser at http://localhost:8888/?token=<TOKEN> =`
 - Next, an example Python Jupyter notebook located at `$PROJECT_DIR/jupyter-spark/resources/example/Simple_Python.ipynb` will be copied over to the Docker instances `~/work` directory which you can find once you log into Jupyter.
 
+**Note**: You may have to make the script executable by giving it the proper privileges, i.e. execute `chmod +x $PROJECT_DIR/jupyter-spark/scripts/build_jupyter_spark.sh` from the command line.
+
 ### Docker CLI Reference
 Section outlines a handful of useful Docker CLI functions for interacting with Docker.
 
