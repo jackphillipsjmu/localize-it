@@ -47,5 +47,5 @@ Section outlines a handful of useful Docker CLI functions for interacting with D
 - **Copy a file from your host machine to a Docker Container** by executing `    docker cp <HOST-FILE> "<CONTAINER-NAME>:<CONTAINER-FILE-PATH>`
 
 #### References
-- Logs can be found locally at `$PROJECT_DIR/jupyter-spark/resources/tmp` with the naming convention of these files being `jupyter_spark_<DATE-IN-MILLIS>.log`
+- If you have run the Docker containers using the script, logs can be found locally at `$PROJECT_DIR/jupyter-spark/resources/tmp` with the naming convention of these files being `jupyter_spark_<DATE-IN-MILLIS>.log`
 - Examples of using `Python`, `R` and `Scala` in a Jupyter Notebook can be found [here](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/specifics.html#apache-spark).
