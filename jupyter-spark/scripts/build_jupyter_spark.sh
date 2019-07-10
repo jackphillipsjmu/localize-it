@@ -2,9 +2,11 @@
 # Script Execution Steps:
 # - Check Docker is running
 # - Destroy existing Docker container with the name jupyter_spark_docker
+# - Move example Jupyter Notebooks from jupyter-spark/resources/example into
+# local directory jupyter-spark/resources/docker/volume which is connected to the Docker instance.
 # - Execute Docker Compose to spin up Jupyter Docker instance
 # - Get token from JSON file on Docker instance and print Jupyter URL
-# - Move example Python notebook to Docker instance
+# - Attempt to open the Jupyter URL in the machines default browser if it is supported.
 #
 # References:
 # - https://jupyter-docker-stacks.readthedocs.io/en/latest/using/specifics.html#apache-spark
@@ -15,8 +17,9 @@ readonly LOG_DIR=../resources/tmp
 readonly CONTAINER_NAME=jupyter_spark_docker
 # Where to store Jupyter Notebooks and example(s)
 readonly NOTEBOOK_WORK_DIR=/home/jovyan/work
-readonly PYTHON_EXAMPLE_FILE=Simple_Python.ipynb
-readonly PYTHON_EXAMPLE_PATH=../resources/example/$PYTHON_EXAMPLE_FILE
+readonly LOCAL_VOLUME_PATH=../resources/docker/volume
+readonly LOCAL_VOLUME_EXAMPLE_PATH=$LOCAL_VOLUME_PATH/example
+readonly EXAMPLE_NOTEPBOOKS_PATH=../resources/example/notebooks
 # Ports used by Docker
 readonly JUPYTER_PORT=8888
 readonly SPARK_UI_PORT=4040
@@ -130,9 +133,22 @@ function getJsonValue {
   echo ${jsonValue##*|}
 }
 
+# Checks the current Operating System and attempts to open the default Browser
+# with the provided URL
+function openUrl {
+  local url=$1
+  echo "= INFO: Attempting to open URL $url ="
+  case "$OSTYPE" in
+    darwin*)  open $url ;;
+    linux*)   xdg-open $url ;;
+    msys*)    start $url ;;
+    *)        echo "= ERROR: Cannot Open Browser with OS: $OSTYPE =" ;;
+  esac
+}
+
 # Builds URL to Jupyter instance that can be accessed locally with security
 # token attached to the URL
-function printJupyterTokenURL {
+function printJupyterTokenURLAndOpenBrowser {
   # If there is no process running on the Jupyter default port then
   # wait until it is up
   if ! processRunningOnPort $JUPYTER_PORT; then
@@ -151,27 +167,33 @@ function printJupyterTokenURL {
   # Retrieve information that lives within the docker container concerning
   # security token credentials
   echo "= INFO: Retrieving Token for Authentication with Jupyter Notebook ="
-  tokenJson=$(docker exec $CONTAINER_NAME sh -c "cat $TOKEN_PATH")
-  tokenValue=$(getJsonValue "$tokenJson" $TOKEN_KEY | sed -e 's/^"//' -e 's/"$//')
+  local tokenJson=$(docker exec $CONTAINER_NAME sh -c "cat $TOKEN_PATH")
+  local tokenValue=$(getJsonValue "$tokenJson" $TOKEN_KEY | sed -e 's/^"//' -e 's/"$//')
+  local localUrl=http://localhost:8888/?token=$tokenValue
   # Print out information
-  echo "= INFO: You may access the Jupyter Notebook in your Browser at http://localhost:8888/?token=$tokenValue ="
+  echo "= INFO: You may access the Jupyter Notebook in your Browser at $localUrl ="
+  # Try to open URL in default browser
+  openUrl $localUrl
 }
 
 # Checks to see if docker is running and if so will build the docker instance.
-# Also, this will handle creating the log directory if necessary
+# Also, this will handle creating necessary directories for logging and
+# tying local data to the container.
 function buildJupyterSpark {
-  # Create Log directory if it does NOT exist
+  # Create Log directory and volume that ties to the container if they do NOT exist
   mkdir -p $LOG_DIR
+  mkdir -p $LOCAL_VOLUME_EXAMPLE_PATH
+  # Move examples to folder that will be connected to Docker container
+  echo "= INFO: Copying Local Example Notebooks as Needed to Shared Volume ="
+  cp -rn $EXAMPLE_NOTEPBOOKS_PATH $LOCAL_VOLUME_EXAMPLE_PATH
   # If Docker is running then build the image, otherwise, show error and exit
   if dockerRunning; then
     # Remove Docker Jupyter/Spark container then rerun
     destroyDockerContainer $CONTAINER_NAME
     runDockerCompose $DOCKER_COMPOSE_PATH
-    # Extract and print URL to notebook
-    printJupyterTokenURL
-    # Copy example Python file to containers work directory
-    echo "= INFO: Copying example Python Spark Jupyter Notebook $PYTHON_EXAMPLE_PATH to $CONTAINER_NAME:$NOTEBOOK_WORK_DIR/$PYTHON_EXAMPLE_FILE"
-    docker cp $PYTHON_EXAMPLE_PATH "$CONTAINER_NAME:$NOTEBOOK_WORK_DIR/$PYTHON_EXAMPLE_FILE"
+    # Extract and print URL to notebook and attempt to open it in the machines
+    # default browser
+    printJupyterTokenURLAndOpenBrowser
   else
     echo "= INFO: Docker is NOT running! Please run Docker then re-execute script. ="
     exit 1
