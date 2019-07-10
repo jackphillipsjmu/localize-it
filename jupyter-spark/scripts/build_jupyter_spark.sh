@@ -16,7 +16,6 @@ readonly DOCKER_COMPOSE_PATH=../resources/docker/docker-jupyter-spark-compose.ym
 readonly LOG_DIR=../resources/tmp
 readonly CONTAINER_NAME=jupyter_spark_docker
 # Where to store Jupyter Notebooks and example(s)
-readonly NOTEBOOK_WORK_DIR=/home/jovyan/work
 readonly LOCAL_VOLUME_PATH=../resources/docker/volume
 readonly LOCAL_VOLUME_EXAMPLE_PATH=$LOCAL_VOLUME_PATH/example
 readonly EXAMPLE_NOTEPBOOKS_PATH=../resources/example/notebooks
