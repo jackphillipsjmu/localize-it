@@ -13,7 +13,6 @@ To spin things up up make sure you have Docker/Docker Compose installed locally 
 #### What do I do after it's up and running?
 Start having fun with Jupyter and Spark! Listed below are URL references for you to use to access the resources that have spun up for you locally.
 - Local Jupyster Instance runs on [http://localhost:8888](http://localhost:8888) but you must provide a valid token to login which is available in the scripts console output or if running the `docker-compose` command yourself will be in the Docker console output.
-- Local SparkUI (Spark Monitoring and Instrumentation UI) is available at [http://localhost:4040](http://localhost:4040) which provides information on what Spark is doing when it executes a job. This comes in handy to see what is running, identify bottlenecks and build understanding on how things are operating under the hood.
 - The `$PROJECT_DIR/jupyter-spark/resources/docker/volume` directory ties to the Docker containers Home directory using a Docker data volume. This enables you to save your work so it is not destroyed when you shutdown and restart the container. Also, it provides an easy way to put your own local files onto the Docker container and retrieve files off of the container as well. Nifty huh?
 
 ### Current Script Execution Flow
@@ -45,7 +44,7 @@ Section outlines a few potentially useful Docker CLI functions for interacting w
 #### Interacting with Container
 - **Start a Bash shell in a Docker Container** by executing `docker exec -it <CONTAINER-NAME> /bin/bash` from the command line. Note, to exit send an interrupt to the shell with `CTRL + D`.
 - **Execute a shell command in a Docker Container** by executing `docker exec -it <CONTAINER-NAME> <COMMAND>` from the command line.
-- **Copy a file from your host machine to a Docker Container** by executing `    docker cp <HOST-FILE> "<CONTAINER-NAME>:<CONTAINER-FILE-PATH>`
+- **Copy a file from your host machine to a Docker Container** by executing `docker cp <HOST-FILE> <CONTAINER-NAME>:<CONTAINER-FILE-PATH>`
 
 #### References
 - If you have run the Docker containers using the script, logs can be found locally at `$PROJECT_DIR/jupyter-spark/resources/tmp` with the naming convention of these files being `jupyter_spark_<DATE-IN-MILLIS>.log`
