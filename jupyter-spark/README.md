@@ -8,26 +8,27 @@ Project Jupyter exists to develop open-source software, open-standards, and serv
 Apache Spark is a unified analytics engine for big data processing, with built-in modules for streaming, SQL, machine learning and graph processing. For more information, check out [Sparks Official Website](https://spark.apache.org/).
 
 ### Getting Started
-To spin things up up make sure you have Docker/Docker Compose installed locally on your machine. If you don't have it installed it's pretty straightforward just follow [Dockers Getting Started Guide](https://www.docker.com/get-started). From here, it is suggested you use the script located at `$PROJECT_DIR/jupyter-spark/scripts/build_jupyter_spark.sh` to handle some of the lift for you such as pulling out tokens for logging into Jupyter and setting up an example Python + Spark notebook. Of coarse, you can run the `docker-compose` command as well via the command line by executing `docker-compose -f $PROJECT_DIR/jupyter-spark/resources/docker/docker-jupyter-spark-compose.yml up`
+To spin things up up make sure you have Docker/Docker Compose installed locally on your machine. If you don't have it installed it's pretty straightforward just follow [Dockers installation documentation](https://docs.docker.com/compose/install/). From here, it is suggested you use the script located at `$PROJECT_DIR/jupyter-spark/scripts/build_jupyter_spark.sh` to handle some of the lift for you such as pulling out tokens for logging into Jupyter and setting up example Python + Spark notebooks. Of coarse, you can run the `docker-compose` command as well via the command line by executing `docker-compose -f $PROJECT_DIR/jupyter-spark/resources/docker/docker-jupyter-spark-compose.yml up`
 
 #### What do I do after it's up and running?
 Start having fun with Jupyter and Spark! Listed below are URL references for you to use to access the resources that have spun up for you locally.
 - Local Jupyster Instance runs on [http://localhost:8888](http://localhost:8888) but you must provide a valid token to login which is available in the scripts console output or if running the `docker-compose` command yourself will be in the Docker console output.
 - Local SparkUI (Spark Monitoring and Instrumentation UI) is available at [http://localhost:4040](http://localhost:4040) which provides information on what Spark is doing when it executes a job. This comes in handy to see what is running, identify bottlenecks and build understanding on how things are operating under the hood.
+- The `$PROJECT_DIR/jupyter-spark/resources/docker/volume` directory ties to the Docker containers Home directory using a Docker data volume. This enables you to save your work so it is not destroyed when you shutdown and restart the container. Also, it provides an easy way to put your own local files onto the Docker container and retrieve files off of the container as well. Nifty huh?
 
 ### Current Script Execution Flow
 By executing the script located at `$PROJECT_DIR/jupyter-spark/scripts/build_jupyter_spark.sh` it will perform the actions listed below:
 - Check to see that Docker is running. If it is not, an error message will be presented and the script will terminate.
 - Build a Docker container that contains a Jupyter instance using `docker-compose`.
   - Note, the container name is explicitly set in the `docker-jupyter-spark-compose.yml` file to `jupyter_spark_docker`.
-- Once the Docker container is up and running it will execute commands on the Jupyter Docker instance to retrieve a URL to your local Jupyter notebook. This will be presented in the console as a URL with a token parameter appended so you don't need to explicitly login just past it in your browser and go!
-  - **Example Console Output**: `= INFO: You may access the Jupyter Notebook in your Browser at http://localhost:8888/?token=<TOKEN> =`
-- Next, an example Python Jupyter notebook located at `$PROJECT_DIR/jupyter-spark/resources/example/Simple_Python.ipynb` will be copied over to the Docker instances `~/work` directory which you can find once you log into Jupyter.
+- Once the Docker container is up and running it will execute commands on the Jupyter Docker instance to retrieve a URL to your local Jupyter notebook. This will be presented in the console as a URL with a token parameter appended. Also, it will check your current Operating System and attempt to open the Jupyter instance in your default browser.
+  - **Example Console Output**: In the event your browser does not open automatically, copy the URL from the console output and paste it into your browser of choice! Example: `= INFO: You may access the Jupyter Notebook in your Browser at http://localhost:8888/?token=<TOKEN> =`
+- Next, example Python Jupyter notebooks that do not currently exist and are unmodified located at `$PROJECT_DIR/jupyter-spark/resources/example/notebooks` will be copied over to a local data volume that ties to the container at `$PROJECT_DIR/jupyter-spark/resources/docker/volume`. This data volume enables you to save your work without it getting lost when you start, shutdown and restart the container. As stated above, this also provides you an easy way to put your local files onto the Docker container and retrieve files off of the container as well.
 
 **Note**: You may have to make the script executable by giving it the proper privileges, i.e. execute `chmod +x $PROJECT_DIR/jupyter-spark/scripts/build_jupyter_spark.sh` from the command line.
 
 ### Docker CLI Reference
-Section outlines a handful of useful Docker CLI functions for interacting with Docker.
+Section outlines a few potentially useful Docker CLI functions for interacting with Docker.
 
 #### Explore Containers
 - **List all Running Docker Containers** from the command line by executing `docker ps`

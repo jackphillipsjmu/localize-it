@@ -32,3 +32,4 @@ postgres-kafka-cdc/resources/tmp/**
 sonar/resources/tmp/**
 elasticsearch-kibana/resources/tmp/**
 jupyter-spark/resources/tmp/**
+jupyter-spark/resources/docker/volume/**
