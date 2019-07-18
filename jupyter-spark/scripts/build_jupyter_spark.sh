@@ -119,10 +119,20 @@ function executeCommandInContainer {
 #
 # param1 = port to check if a process is running on it
 function processRunningOnPort {
-  if lsof -Pi :$1 -sTCP:LISTEN -t >/dev/null ; then
-    return
+  # If we are on a Mac then use lsof to get port info, otherwise, use netstat
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    if lsof -Pi :$1 -sTCP:LISTEN -t >/dev/null ; then
+      return
+    else
+      false
+    fi
   else
-    false
+    cmdResult=$(netstat -ltnp | grep -i $1)
+    if $cmdResult; then
+      false
+    else
+      return
+    fi
   fi
 }
 
@@ -201,3 +211,5 @@ function buildJupyterSpark {
 
 # Call main function that will setup everything
 buildJupyterSpark
+
+# processRunningOnPort 8888
