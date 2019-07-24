@@ -33,3 +33,6 @@ sonar/resources/tmp/**
 elasticsearch-kibana/resources/tmp/**
 jupyter-spark/resources/tmp/**
 jupyter-spark/resources/docker/volume/**
+keras/resources/tmp/**
+keras/resources/docker/volume/**
+mongodb/resources/tmp/**
