@@ -127,7 +127,7 @@ function processRunningOnPort {
       false
     fi
   else
-    cmdResult=$(netstat -ltnp | grep -i $1)
+    cmdResult=$(netstat | grep -i $1)
     if $cmdResult; then
       false
     else
