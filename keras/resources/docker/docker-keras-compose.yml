@@ -1,0 +1,9 @@
+version: '3'
+services:
+  keras:
+    image: jupyter/tensorflow-notebook
+    container_name: "keras_docker"
+    volumes:
+      - ./volume:/home/jovyan
+    ports:
+      - "8888:8888"

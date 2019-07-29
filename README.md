@@ -17,6 +17,8 @@ Lots of stuff! So far there are examples showing the following tech stack compon
 | Gradle        | Build automation system that is the "next iteration" of Maven |
 | React         | Popular JavaScript library for building user interfaces |
 | PostgreSQL    | Relational Database |
+| MongoDB       | NoSQL Database |
+| Keras         | Deep Learning Library for Python |
 | Spark         | Unified analytics engine for large-scale data processing. |
 | Debezium  | Debezium is an open source distributed platform for change data capture. Start it up, point it at your databases, and your apps can start responding to all of the inserts, updates, and deletes that other apps commit to your databases. Debezium is durable and fast, so your apps can respond quickly and never miss an event, even when things go wrong. |
 | SonarQube | SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically. Using static code analysis it can identify security risks, bugs and code smells that you can configure yourself! |
@@ -66,6 +68,12 @@ Using [Apache Spark](https://spark.apache.org/) this project will pull in a S3 C
 
 ### PostgreSQL ([postgres](postgres))
 Creates a Docker container that contains a PostgreSQL instance which is populated with an example database, table and table data.
+
+### MongoDB ([mongodb](mongodb))
+Creates a Docker container containing a MongoDB instance populated with a sample dataset.
+
+### Keras ([keras](keras))
+Creates a Docker container containing Keras deep learning library ran on jupyter-notebook.
 
 ### SonarQube ([sonar](sonar))
 Creates two Docker containers that contain a SonarQube instance and a corresponding PostgreSQL backend to support it. SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically. Using static code analysis it can identify security risks, bugs and code smells that you can configure yourself!
