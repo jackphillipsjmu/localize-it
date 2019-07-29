@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 #
-# Script to spin up PostgreSQL Docker instance which then has an example
+# Script to spin up MongoDB Docker instance which then has an example
 # database and table created to set things up initially.
 #
 
 # Properties used by underlying script functions
 DOCKER_COMPOSE_PATH=../resources/docker-mongodb-compose.yml
+MONGODB_DATALOAD_PATH=../resources/json/data_load.js
 LOG_DIR=../resources/tmp
 CONTAINER_NAME=mongo
 DB_NAME=admin
@@ -71,27 +72,21 @@ function destroyDockerContainer {
 function runDockerCompose {
   local dockerFile=$1
   echo "= INFO: Running Docker Compose on file $dockerFile ="
-  LOG_FILE_PATH="$LOG_DIR/postgres_`date +%s`.log"
+  LOG_FILE_PATH="$LOG_DIR/mongodb_`date +%s`.log"
   echo "= INFO: Logs for this Docker container can be found in $LOG_FILE_PATH ="
   # Run docker compose
   docker-compose -f $dockerFile up --force-recreate --build > "$LOG_FILE_PATH" 2>&1 &
 }
 
-# Creates DB and Table in Postgres. This can also be done in the docker-compose
+# Creates DB and Table in MongoDB. This can also be done in the docker-compose
 # file as well just modify the YAML file to read something like this
 #   volumes:
 #     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 #
 function setupExampleDatabaseAndTable {
   # Create database
-  echo "= INFO: Creatingt Database $DB_NAME ="
-  docker exec -it $CsONTAINER_NAME bash
-  mongo
-  use admin
-  show collections
-  db.companies.insert([{"name":"Test Company","email":"email@company.com","headquarter":"CityName, VA"}])
-  db.companies.find()
-  exit
+  echo "= INFO: Creating Database $DB_NAME ="
+  docker exec $CONTAINER_NAME mongo --eval "db = db.getSiblingDB('admin'); db.createCollection('companies'); db.companies.insert([{'name':'John'}]); db.companies.insert([{'name':'Smith'}]); db.companies.insert([{'name':'Doe'}]); db.companies.find()"
 }
 
 # Checks to see if docker is running and if so will build the docker instance
@@ -100,10 +95,10 @@ function buildMongodb {
   mkdir -p $LOG_DIR
   # If Docker is running then build the image
   if dockerRunning; then
-    # Remove docker postgres container then rerun
+    # Remove docker MongoDB container then rerun
     destroyDockerContainer $CONTAINER_NAME
     runDockerCompose $DOCKER_COMPOSE_PATH
-    # Wait unti Postgres is up
+    # Wait unti MongoDB is up
     mongodbUp=false
     while ! $mongodbUp; do
       if grep -q "waiting for connections on port" "$LOG_FILE_PATH"; then
