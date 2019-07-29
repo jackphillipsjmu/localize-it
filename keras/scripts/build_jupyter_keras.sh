@@ -17,8 +17,8 @@ readonly LOG_DIR=../resources/tmp
 readonly CONTAINER_NAME=keras_docker
 # Where to store Jupyter Notebooks and example(s)
 readonly LOCAL_VOLUME_PATH=../resources/docker/volume
-readonly LOCAL_VOLUME_EXAMPLE_PATH=$LOCAL_VOLUME_PATH/example
-readonly EXAMPLE_NOTEPBOOKS_PATH=../resources/example/notebooks
+readonly LOCAL_VOLUME_EXAMPLE_PATH=$LOCAL_VOLUME_PATH
+readonly EXAMPLE_NOTEPBOOKS_PATH=../resources/example
 # Ports used by Docker
 readonly JUPYTER_PORT=8888
 # Security token info used to access Jupyter notebook
