@@ -1,5 +1,7 @@
 # localize-it
-Repository intended to show how to setup and perform local development for both simple and complex software solutions. This helps reduce costs running things within an external environment while attempting to mitigate the classic _"works on my machine"_ paradigm. This repository will be updated to include more functionality in the future but of coarse feel free to add new additions and feature requests!
+_NOTE: This repository has not been updated in a while so while not the latest and greatest I hope it helps you!_
+
+Repository intended to show how to setup and perform local development for both simple and complex software solutions. This helps reduce costs running things within an external environment while attempting to mitigate the classic _"works on my machine"_ paradigm. Feel free to add new additions and feature requests!
 
 ## What's Inside?
 Lots of stuff! So far there are examples showing the following tech stack components/languages but more are soon to come!
